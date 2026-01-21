@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
-import dollarLogo from "@assets/Untitled_design__2_-removebg-preview_1769017268442.png";
+import dollarLogo from "@assets/Untitled_design__2_-removebg-preview_1769017403248.png";
 
 interface ReceiptProps {
   amount: number;
@@ -52,7 +52,11 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
       <div className="mt-32 flex flex-col items-center">
         <div className="flex items-center">
           <span className="text-6xl font-bold mt-1 tracking-tighter">-</span>
-          <span className="text-[84px] font-bold leading-none tracking-tighter mr-2">$</span>
+          <img 
+            src={dollarLogo} 
+            alt="currency" 
+            className="w-16 h-16 object-contain mt-2 mr-1"
+          />
           <span className="text-[84px] font-bold leading-none tracking-tighter">{amountInt}</span>
           {amountDec !== "00" && (
             <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start">{amountDec}</span>
