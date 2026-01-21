@@ -14,7 +14,6 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
-  // Exact mobile-matching colors from screenshot
   const primaryColor = "#012a1c"; 
 
   return (
@@ -28,21 +27,8 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         color: primaryColor
       }}
     >
-      {/* Real Mobile Status Bar */}
-      <div className="w-full flex justify-between items-center px-5 pt-3 opacity-90">
-        <span className="text-[13px] font-semibold tracking-tight">{format(date, "h:mm")}</span>
-        <div className="flex gap-1.5 items-center">
-             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4.97 0-9 4.03-9 9 0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-2.31C18.16 18.67 21 15.17 21 11c0-4.97-4.03-9-9-9z"/></svg>
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-             <div className="flex items-center gap-0.5 border border-current rounded-[2px] px-0.5 h-3">
-               <div className="bg-current h-2 w-3"></div>
-               <span className="text-[9px] font-bold leading-none">95</span>
-             </div>
-        </div>
-      </div>
-
-      {/* Top Navigation */}
-      <div className="w-full flex justify-between items-center px-6 pt-3 pb-4">
+      {/* Top Navigation Bar (The one with back arrow and dots) */}
+      <div className="w-full flex justify-between items-center px-6 pt-10 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
@@ -78,7 +64,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         </div>
       </div>
 
-      {/* Status Footer - EXTREMELY MATCHED FONT AND COLOR */}
+      {/* Status Footer */}
       <div className="absolute bottom-[84px] flex items-center gap-2.5">
         <div className="w-[26px] h-[26px] rounded-full border-[2px] border-[#012a1c] flex items-center justify-center">
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
@@ -88,7 +74,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         <span className="text-[19px] font-bold tracking-tight">Complete</span>
       </div>
 
-      {/* Real Samsung Navigation Bar - FIXED GEOMETRY */}
+      {/* Real Samsung Navigation Bar */}
       <div className="absolute bottom-0 w-full h-12 bg-white flex justify-around items-center px-10">
         <div className="flex items-center gap-2 opacity-30">
            <div className="w-[1.5px] h-3.5 bg-black"></div>
