@@ -142,9 +142,6 @@ export default function Generator() {
               <Terminal className="w-8 h-8 text-emerald-500" />
               SAMSUNG_S21_SIMULATOR
             </h1>
-            <p className="text-neutral-500 mb-8 text-xs tracking-[0.2em] font-black uppercase">
-              Root Level Patch: V7.0
-            </p>
 
             <div className="space-y-4">
               <div className="flex gap-4">
@@ -177,57 +174,6 @@ export default function Generator() {
                 </div>
               )}
             </div>
-          </div>
-
-          <div className="border border-neutral-800 bg-black p-5 rounded-xl h-[400px] overflow-hidden flex flex-col font-mono text-sm shadow-inner">
-            <ScrollArea className="flex-1">
-              <div className="space-y-1 text-emerald-500/80">
-                <p className="text-white font-black mb-2 tracking-widest">[ SYSTEM LOG ]</p>
-                <p>{">"} BOOTING KERNEL...</p>
-                <p>{">"} LOADING ASSET: DOLLAR_LOGO_PNG</p>
-                {generatedImages.map((img, i) => (
-                  <p key={i} className="text-emerald-400">
-                    {">"} FRAME_{i + 1}: CAPTURED ({img.id}.jpg)
-                  </p>
-                ))}
-                {generatedImages.length > 0 && !isGenerating && (
-                  <div className="mt-6 p-3 bg-emerald-500 text-black font-black uppercase text-center animate-pulse rounded">
-                    Batch Ready! Click "SAVE NOW" to Download
-                  </div>
-                )}
-              </div>
-            </ScrollArea>
-          </div>
-
-          <div className="border border-neutral-800 bg-neutral-900/50 p-6 rounded-xl backdrop-blur-sm shadow-2xl">
-            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Save className="w-5 h-5 text-emerald-500" />
-              SAVED_DATABASE_METADATA
-            </h2>
-            <ScrollArea className="h-[200px]">
-              <div className="space-y-2">
-                {history.map((tx) => (
-                  <div key={tx.id} className="flex items-center justify-between p-2 border border-neutral-800 rounded bg-black/40 text-[10px]">
-                    <div className="flex flex-col">
-                      <span className="text-emerald-500 font-bold">{tx.remarks.toUpperCase()}</span>
-                      <span className="text-neutral-500">{tx.date} {tx.time}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-white font-black">${tx.amount}</span>
-                      {tx.imageUrl && (
-                        <a 
-                          href={tx.imageUrl} 
-                          download={`receipt_${tx.id}.jpg`}
-                          className="p-1 hover:bg-emerald-500/20 rounded transition-colors"
-                        >
-                          <Save size={14} className="text-emerald-500" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
           </div>
         </div>
 
