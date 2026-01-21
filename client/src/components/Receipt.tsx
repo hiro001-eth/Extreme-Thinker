@@ -55,7 +55,8 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-[42px] h-[58px] object-contain mt-3.5"
+            className="w-[54px] h-[72px] object-contain mt-3.5 mix-blend-multiply"
+            style={{ filter: "contrast(1.2) brightness(1.1)" }}
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c] ml-0.5">{amountInt}</span>
           {amountDec !== "00" && (
