@@ -23,6 +23,7 @@ export async function registerRoutes(
   app.post("/api/transactions", async (req, res) => {
     const result = insertTransactionSchema.safeParse(req.body);
     if (!result.success) {
+      console.error("Validation error:", result.error);
       return res.status(400).json({ error: result.error });
     }
 
@@ -36,7 +37,9 @@ export async function registerRoutes(
         const fileName = `receipt_${timestamp}.jpg`;
         const filePath = path.join(generatedDir, fileName);
         
-        await fs.writeFile(filePath, base64Data, "base64");
+        // Ensure the data is written correctly as a buffer
+        await fs.writeFile(filePath, Buffer.from(base64Data, 'base64'));
+        console.log(`Image saved to ${filePath}`);
         imageUrl = `/generated/${fileName}`;
       } catch (err) {
         console.error("Failed to save image to disk:", err);

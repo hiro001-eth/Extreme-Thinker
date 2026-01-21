@@ -62,15 +62,25 @@ export default function Generator() {
     const element = document.getElementById("receipt-capture-target");
     if (element) {
       try {
+        // Force images to be loaded before capture
+        const images = element.getElementsByTagName('img');
+        await Promise.all(Array.from(images).map(img => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+          });
+        }));
+
         const canvas = await html2canvas(element, {
-          scale: 3, 
-          logging: false,
+          scale: 2, // Slightly lower scale for faster processing
+          logging: true, // Enable logging to see errors in console
           useCORS: true,
           allowTaint: true,
           backgroundColor: "#ffffff",
           windowWidth: 360,
           windowHeight: 740,
-          imageTimeout: 0,
+          imageTimeout: 15000,
         });
         
         const dataUrl = canvas.toDataURL("image/jpeg", 0.8); // 80% quality
