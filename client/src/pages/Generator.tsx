@@ -17,11 +17,11 @@ export default function Generator() {
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
 
   const handleStart = async () => {
+    console.log("Starting generation...");
     setIsGenerating(true);
     setProgress(0);
     setGeneratedImages([]);
     
-    // Always generate 10 as per user request
     const fullData = generateTransactions();
     const data = fullData.slice(0, 10); 
     setTransactions(data);
@@ -33,12 +33,12 @@ export default function Generator() {
     if (currentProcessingIndex === -1) return;
     
     if (currentProcessingIndex >= transactions.length) {
+      console.log("Generation complete. 10 images captured.");
       setIsGenerating(false);
       setCurrentProcessingIndex(-1);
       return;
     }
 
-    // Increased wait time for visual stability
     await new Promise(resolve => setTimeout(resolve, 500));
     
     const element = document.getElementById("receipt-capture-target");
@@ -51,7 +51,6 @@ export default function Generator() {
           backgroundColor: "#ffffff",
           windowWidth: 360,
           windowHeight: 740,
-          removeContainer: true
         });
         
         const dataUrl = canvas.toDataURL("image/jpeg", 1.0);
@@ -75,35 +74,30 @@ export default function Generator() {
   }, [currentProcessingIndex, isGenerating]);
 
   const handleDownloadZip = async () => {
-    if (generatedImages.length === 0) return;
+    if (generatedImages.length === 0) {
+      console.error("No images to download");
+      return;
+    }
+    
+    console.log("Initializing ZIP creation...");
+    const zip = new JSZip();
     
     try {
-      const zip = new JSZip();
-      
-      // Use for loop for sequential addition to zip
       for (let i = 0; i < generatedImages.length; i++) {
         const dataUrl = generatedImages[i];
         const base64Data = dataUrl.split(',')[1];
         zip.file(`receipt_${i + 1}.jpg`, base64Data, { base64: true });
+        console.log(`Added image ${i + 1} to ZIP`);
       }
       
-      const blob = await zip.generateAsync({ 
-        type: "blob",
-        mimeType: "application/zip"
-      });
+      console.log("Generating ZIP blob...");
+      const content = await zip.generateAsync({ type: "blob" });
       
-      const fileName = `dataset_${Date.now()}.zip`;
-      
-      // Use direct browser download trigger
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
+      console.log("Triggering download...");
+      saveAs(content, `receipts_batch_${Date.now()}.zip`);
+      console.log("Download triggered successfully.");
     } catch (error) {
-      console.error("Zip failed", error);
+      console.error("ZIP creation failed:", error);
     }
   };
 
@@ -114,10 +108,10 @@ export default function Generator() {
           <div className="border border-primary/20 bg-card/50 p-6 rounded-lg backdrop-blur-sm">
             <h1 className="text-3xl font-bold text-primary mb-2 flex items-center gap-2">
               <Terminal className="w-8 h-8" />
-              ULTRA_GEN_V4
+              SYNTH_GEN_V5
             </h1>
             <p className="text-muted-foreground mb-8 text-xs tracking-widest">
-              SYSTEM_READY // ZERO_METADATA_MODE
+              ROOT_LEVEL_DOWNLOAD_FIX // STABLE_EXPORT
             </p>
 
             <div className="space-y-4">
@@ -152,13 +146,12 @@ export default function Generator() {
           <div className="border border-border bg-black p-4 rounded-lg h-[400px] overflow-hidden flex flex-col font-mono text-sm shadow-2xl">
             <ScrollArea className="flex-1">
               <div className="space-y-1 text-green-500 font-bold">
-                <p>{">"} BOOT_V4: SUCCESS</p>
-                <p>{">"} STATUS_BAR_STRIP: COMPLETE</p>
+                <p>{">"} SYSTEM_V5: ACTIVE</p>
                 {generatedImages.map((_, i) => (
-                  <p key={i}>{">"} FRAME_{i + 1}: CAPTURED</p>
+                  <p key={i}>{">"} IMAGE_{i + 1}: CAPTURED</p>
                 ))}
                 {generatedImages.length === 10 && !isGenerating && (
-                  <p className="text-white bg-primary px-2 mt-2 inline-block">READY: DOWNLOAD_ZIP_ENABLED</p>
+                  <p className="text-white bg-primary px-2 mt-2 inline-block">DOWNLOAD READY</p>
                 )}
               </div>
             </ScrollArea>
@@ -181,7 +174,7 @@ export default function Generator() {
             <div className="flex flex-col items-center">
               <div className="flex items-center gap-4 text-primary font-black text-3xl mb-8 italic uppercase tracking-tighter">
                 <CheckCircle2 size={40} className="text-green-500" />
-                Capture Stream Complete
+                Batch Ready
               </div>
               <div className="grid grid-cols-5 gap-4 scale-[0.6]">
                 {generatedImages.map((img, i) => (
