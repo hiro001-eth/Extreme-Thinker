@@ -8,14 +8,12 @@ export interface Transaction {
 }
 
 const REMARKS = [
-  "no cap shopping spree", "lowkey coffee run", "slayed at lunch", "burger was bussin", 
-  "pizza is life fr", "iced latte vibes", "snack attack mood", "market haul", 
-  "groceries for the week", "uber to the spot", "taxi chronicles", "movie night fr", 
-  "subway commute", "gift for the bestie", "main character energy clothes", 
-  "dinner with the gang", "breakfast of champions", "pharmacy run", "bookstore finds",
-  "rent is due lol", "wifi bill pain", "target run gone wrong", "thrifted this fit",
-  "ordered in again", "gym membership fee", "gas station snacks", "birthday gift",
-  "new shoes who dis", "streaming sub renew", "gaming setup parts"
+  "pizza", "lunch", "book", "bill", "coffee", "burger", "snacks", "market", 
+  "groceries", "uber", "taxi", "movie", "gift", "clothes", "dinner", 
+  "breakfast", "pharmacy", "rent", "wifi", "gaming", "target", "thrift", 
+  "shoes", "fitness", "gas", "subway", "coffee run", "pizza night", 
+  "lunch date", "book haul", "rent due", "wifi bill", "gym fee", 
+  "gas station", "gift shop", "movie ticket"
 ];
 
 // Helper to get random number between min and max (inclusive)
