@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { generateTransactions, Transaction } from "@/lib/generator";
+import { generateTransactions } from "@/lib/generator";
 import { Receipt } from "@/components/Receipt";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -7,13 +7,30 @@ import { Save, Play, RefreshCw, Terminal, CheckCircle2 } from "lucide-react";
 import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Transaction } from "@shared/schema";
 
 export default function Generator() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentProcessingIndex, setCurrentProcessingIndex] = useState(-1);
+  const [currentBatch, setCurrentBatch] = useState<any[]>([]);
   const [generatedImages, setGeneratedImages] = useState<{url: string, id: string}[]>([]);
+
+  const { data: history = [] } = useQuery<Transaction[]>({
+    queryKey: ["/api/transactions"],
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (newTx: any) => {
+      const res = await apiRequest("POST", "/api/transactions", newTx);
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/transactions"] });
+    },
+  });
 
   const handleStart = async () => {
     console.log("Starting generation...");
@@ -24,15 +41,14 @@ export default function Generator() {
     // Create 10 images for testing
     const fullData = generateTransactions();
     const data = fullData.slice(0, 10); 
-    setTransactions(data);
-    
+    setCurrentBatch(data);
     setCurrentProcessingIndex(0);
   };
 
   const processNext = async () => {
     if (currentProcessingIndex === -1) return;
     
-    if (currentProcessingIndex >= transactions.length) {
+    if (currentProcessingIndex >= currentBatch.length) {
       console.log("Generation complete.");
       setIsGenerating(false);
       setCurrentProcessingIndex(-1);
@@ -55,10 +71,20 @@ export default function Generator() {
         });
         
         const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
-        const transactionId = transactions[currentProcessingIndex].id || `tx_${Date.now()}_${currentProcessingIndex}`;
-        setGeneratedImages(prev => [...prev, { url: dataUrl, id: transactionId }]);
+        const txData = currentBatch[currentProcessingIndex];
         
-        const newProgress = ((currentProcessingIndex + 1) / transactions.length) * 100;
+        // Save to backend
+        const savedTx = await mutation.mutateAsync({
+          amount: txData.amount,
+          date: txData.date,
+          remarks: txData.remarks,
+          time: txData.time || "12:00 PM",
+          imageUrl: dataUrl
+        });
+
+        setGeneratedImages(prev => [...prev, { url: dataUrl, id: savedTx.id }]);
+        
+        const newProgress = ((currentProcessingIndex + 1) / currentBatch.length) * 100;
         setProgress(newProgress);
         
         setCurrentProcessingIndex(prev => prev + 1);
@@ -160,13 +186,13 @@ export default function Generator() {
         <div className="border border-neutral-800 bg-neutral-900/20 rounded-xl p-8 flex flex-col items-center justify-center min-h-[800px] relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.05),transparent)] pointer-events-none" />
           
-          {currentProcessingIndex >= 0 && transactions[currentProcessingIndex] && (
+          {currentProcessingIndex >= 0 && currentBatch[currentProcessingIndex] && (
              <div className="shadow-[0_40px_100px_rgba(0,0,0,0.8)] scale-90 origin-center">
                <Receipt 
                  id="receipt-capture-target"
-                 amount={transactions[currentProcessingIndex].amount}
-                 date={transactions[currentProcessingIndex].date}
-                 remarks={transactions[currentProcessingIndex].remarks}
+                 amount={currentBatch[currentProcessingIndex].amount}
+                 date={currentBatch[currentProcessingIndex].date}
+                 remarks={currentBatch[currentProcessingIndex].remarks}
                />
              </div>
           )}
