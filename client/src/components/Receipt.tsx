@@ -39,36 +39,36 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
       </div>
 
       {/* Profile Section */}
-      <div className="mt-4 flex flex-col items-center">
-        <div className="w-20 h-20 rounded-full bg-[#f3f5f7] flex items-center justify-center text-2xl font-medium text-gray-700 mb-4">
+      <div className="mt-8 flex flex-col items-center">
+        <div className="w-[88px] h-[88px] rounded-full bg-[#f4f6f8] flex items-center justify-center text-[28px] font-medium text-gray-700 mb-6">
           A
         </div>
-        <h2 className="text-[21px] font-bold tracking-tight">Anna Boyer</h2>
-        <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to $Anna-Boyer-2</p>
-        <p className="text-gray-500 text-[13px] font-medium tracking-tight">from Checking Account</p>
+        <h2 className="text-[23px] font-bold tracking-tight text-[#012a1c]">Anna Boyer</h2>
+        <p className="text-gray-500 text-[15px] mt-1.5 font-medium tracking-tight">Payment to $Anna-Boyer-2</p>
+        <p className="text-gray-500 text-[15px] font-medium tracking-tight">from Checking Account</p>
       </div>
 
       {/* Main Transaction Info */}
-      <div className="mt-32 flex flex-col items-center">
-        <div className="flex items-center">
-          <span className="text-6xl font-bold mt-1 tracking-tighter">-</span>
+      <div className="mt-36 flex flex-col items-center">
+        <div className="flex items-center -ml-4">
+          <span className="text-[104px] font-bold tracking-[-0.08em] mt-2">-</span>
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-14 h-14 object-contain mt-1"
-            style={{ filter: "brightness(0.2) sepia(1) hue-rotate(100deg) saturate(2)" }}
+            className="w-[72px] h-[72px] object-contain mx-[-4px]"
+            style={{ filter: "brightness(0.12) sepia(1) hue-rotate(110deg) saturate(2.2)" }}
           />
-          <span className="text-[84px] font-bold leading-none tracking-tighter">{amountInt}</span>
+          <span className="text-[124px] font-bold leading-none tracking-[-0.06em]">{amountInt}</span>
           {amountDec !== "00" && (
-            <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start">{amountDec}</span>
+            <span className="text-[44px] font-bold mt-4 tracking-[-0.05em] align-top self-start">{amountDec}</span>
           )}
         </div>
         
-        <div className="mt-4 text-[17px] font-medium text-gray-700 tracking-tight">
+        <div className="mt-2 text-[19px] font-medium text-[#111] tracking-tight">
           {remarks}
         </div>
         
-        <div className="mt-1 text-gray-500 text-[17px] font-medium tracking-tight">
+        <div className="mt-1 text-gray-500 text-[19px] font-medium tracking-tight">
           {dateStr} at {timeStr}
         </div>
       </div>
