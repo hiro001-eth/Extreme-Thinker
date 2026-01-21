@@ -52,11 +52,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
       <div className="mt-32 flex flex-col items-center">
         <div className="flex items-center">
           <span className="text-6xl font-bold mt-1 tracking-tighter">-</span>
-          <img 
-            src={dollarLogo} 
-            alt="currency" 
-            className="w-14 h-14 object-contain mt-1"
-          />
+          <span className="text-[84px] font-bold leading-none tracking-tighter mr-2">$</span>
           <span className="text-[84px] font-bold leading-none tracking-tighter">{amountInt}</span>
           {amountDec !== "00" && (
             <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start">{amountDec}</span>
