@@ -8,10 +8,14 @@ export interface Transaction {
 }
 
 const REMARKS = [
-  "shopping", "foods", "lunched", "pizza", "burger", 
-  "coffee", "drinks", "snacks", "market", "groceries",
-  "uber", "taxi", "movie", "subway", "gift", 
-  "clothes", "dinner", "breakfast", "pharmacy", "books"
+  "no cap shopping spree", "lowkey coffee run", "slayed at lunch", "burger was bussin", 
+  "pizza is life fr", "iced latte vibes", "snack attack mood", "market haul", 
+  "groceries for the week", "uber to the spot", "taxi chronicles", "movie night fr", 
+  "subway commute", "gift for the bestie", "main character energy clothes", 
+  "dinner with the gang", "breakfast of champions", "pharmacy run", "bookstore finds",
+  "rent is due lol", "wifi bill pain", "target run gone wrong", "thrifted this fit",
+  "ordered in again", "gym membership fee", "gas station snacks", "birthday gift",
+  "new shoes who dis", "streaming sub renew", "gaming setup parts"
 ];
 
 // Helper to get random number between min and max (inclusive)
@@ -25,62 +29,32 @@ const randomInt = (min: number, max: number) => {
 
 export const generateTransactions = (): Transaction[] => {
   const transactions: Transaction[] = [];
-  const startDate = new Date(2026, 0, 1); // Jan 1, 2026
-  
-  const highVolumeDays = [1, 3, 8, 11, 17]; // Days of month
-  const totalDays = 19;
+  const totalTransactions = 10; // We only need 10 for the batch
   
   let grandTotal = 0;
 
-  for (let i = 0; i < totalDays; i++) {
-    const currentDate = addDays(startDate, i);
-    const dayOfMonth = currentDate.getDate();
+  for (let i = 0; i < totalTransactions; i++) {
+    // Random day between Jan 1 and Jan 19
+    const day = randomInt(1, 19);
+    const currentDate = new Date(2026, 0, day);
     
-    const isHighVolume = highVolumeDays.includes(dayOfMonth);
+    // Random time between 8:00 (8am) and 22:00 (10pm)
+    const hour = randomInt(8, 22);
+    const minute = randomInt(0, 59);
+    const transactionDate = setMinutes(setHours(currentDate, hour), minute);
     
-    // Target daily totals
-    // High: 200-250
-    // Low: 100-170
-    // I'll bump these slightly to ensure we hit the 3100-3500 range
-    // High: 220-270
-    // Low: 120-190
-    const targetDailyTotal = isHighVolume 
-      ? randomRange(220, 270) 
-      : randomRange(120, 190);
-      
-    let dailyTotal = 0;
+    // Transaction amount 5 - 15
+    const amount = randomRange(5, 15);
     
-    while (dailyTotal < targetDailyTotal) {
-      // Transaction amount 5 - 15
-      const amount = randomRange(5, 15);
-      
-      // Don't exceed target too much
-      if (dailyTotal + amount > targetDailyTotal + 10) break;
-      
-      // Random time between 8:00 (8am) and 22:00 (10pm)
-      const hour = randomInt(8, 22);
-      const minute = randomInt(0, 59);
-      const transactionDate = setMinutes(setHours(currentDate, hour), minute);
-      
-      transactions.push({
-        id: Math.random().toString(36).substr(2, 9),
-        amount: parseFloat(amount.toFixed(2)),
-        date: transactionDate,
-        remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
-      });
-      
-      dailyTotal += amount;
-    }
+    transactions.push({
+      id: Math.random().toString(36).substr(2, 9),
+      amount: parseFloat(amount.toFixed(2)),
+      date: transactionDate,
+      remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
+    });
     
-    grandTotal += dailyTotal;
+    grandTotal += amount;
   }
-  
-  // Validation: Check if grandTotal is within 3100-3500
-  // If not, we might need to adjust (add/remove transactions)
-  // But given the ranges:
-  // 5 high days * ~245 = 1225
-  // 14 low days * ~155 = 2170
-  // Total ~3395. This is well within the 3100-3500 range.
   
   console.log(`Generated ${transactions.length} transactions. Total: $${grandTotal.toFixed(2)}`);
   
