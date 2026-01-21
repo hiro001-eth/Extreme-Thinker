@@ -15,6 +15,7 @@ export default function Generator() {
   const [progress, setProgress] = useState(0);
   const [currentProcessingIndex, setCurrentProcessingIndex] = useState(-1);
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
+  const [isCapturing, setIsCapturing] = useState(false);
 
   const handleStart = async () => {
     console.log("Starting generation...");
@@ -22,8 +23,7 @@ export default function Generator() {
     setProgress(0);
     setGeneratedImages([]);
     
-    const fullData = generateTransactions();
-    const data = fullData.slice(0, 10); 
+    const data = generateTransactions();
     setTransactions(data);
     
     setCurrentProcessingIndex(0);
@@ -33,13 +33,15 @@ export default function Generator() {
     if (currentProcessingIndex === -1) return;
     
     if (currentProcessingIndex >= transactions.length) {
-      console.log("Generation complete. 10 images captured.");
+      console.log("Generation complete. Images captured: " + generatedImages.length);
       setIsGenerating(false);
       setCurrentProcessingIndex(-1);
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 500));
+    setIsCapturing(true);
+    // Longer delay to ensure render is complete
+    await new Promise(resolve => setTimeout(resolve, 800));
     
     const element = document.getElementById("receipt-capture-target");
     if (element) {
@@ -59,27 +61,34 @@ export default function Generator() {
         const newProgress = ((currentProcessingIndex + 1) / transactions.length) * 100;
         setProgress(newProgress);
         
+        setIsCapturing(false);
         setCurrentProcessingIndex(prev => prev + 1);
       } catch (err) {
         console.error("Capture error", err);
         setIsGenerating(false);
+        setIsCapturing(false);
       }
+    } else {
+      console.error("Capture target not found");
+      setIsGenerating(false);
+      setIsCapturing(false);
     }
   };
 
   useEffect(() => {
-    if (isGenerating && currentProcessingIndex >= 0) {
+    if (isGenerating && currentProcessingIndex >= 0 && !isCapturing) {
       processNext();
     }
-  }, [currentProcessingIndex, isGenerating]);
+  }, [currentProcessingIndex, isGenerating, isCapturing]);
 
   const handleDownloadZip = async () => {
     if (generatedImages.length === 0) {
-      console.error("No images to download");
+      console.error("No images to download. State length: " + generatedImages.length);
+      alert("No images available to download. Please generate them first.");
       return;
     }
     
-    console.log("Initializing ZIP creation...");
+    console.log("Initializing ZIP creation for " + generatedImages.length + " images...");
     const zip = new JSZip();
     
     try {
@@ -87,17 +96,21 @@ export default function Generator() {
         const dataUrl = generatedImages[i];
         const base64Data = dataUrl.split(',')[1];
         zip.file(`receipt_${i + 1}.jpg`, base64Data, { base64: true });
-        console.log(`Added image ${i + 1} to ZIP`);
+        console.log(`Added image ${i + 1}/${generatedImages.length} to ZIP`);
       }
       
       console.log("Generating ZIP blob...");
-      const content = await zip.generateAsync({ type: "blob" });
+      const content = await zip.generateAsync({ 
+        type: "blob",
+        compression: "STORE" 
+      });
       
-      console.log("Triggering download...");
-      saveAs(content, `receipts_batch_${Date.now()}.zip`);
-      console.log("Download triggered successfully.");
+      console.log("Triggering download via saveAs...");
+      saveAs(content, `receipts_dataset_${Date.now()}.zip`);
+      console.log("Download command issued.");
     } catch (error) {
-      console.error("ZIP creation failed:", error);
+      console.error("CRITICAL: ZIP creation failed:", error);
+      alert("ZIP creation failed. Check console for details.");
     }
   };
 
@@ -108,10 +121,10 @@ export default function Generator() {
           <div className="border border-primary/20 bg-card/50 p-6 rounded-lg backdrop-blur-sm">
             <h1 className="text-3xl font-bold text-primary mb-2 flex items-center gap-2">
               <Terminal className="w-8 h-8" />
-              SYNTH_GEN_V5
+              SYNTH_GEN_V6
             </h1>
             <p className="text-muted-foreground mb-8 text-xs tracking-widest">
-              ROOT_LEVEL_DOWNLOAD_FIX // STABLE_EXPORT
+              ULTRA_STABLE_EXPORT // REPLICA_FONTS
             </p>
 
             <div className="space-y-4">
@@ -122,7 +135,7 @@ export default function Generator() {
                   className="w-full text-lg h-16 bg-primary text-primary-foreground font-black"
                 >
                   {isGenerating ? <RefreshCw className="animate-spin mr-2" /> : <Play className="mr-2" />}
-                  GENERATE 10
+                  GENERATE ALL
                 </Button>
                 
                 <Button 
@@ -131,13 +144,14 @@ export default function Generator() {
                   variant="outline"
                   className="w-full text-lg h-16 border-primary/50 text-primary hover:bg-primary/10 font-black"
                 >
-                  <Download className="mr-2" /> DOWNLOAD ZIP
+                  <Download className="mr-2" /> DOWNLOAD ZIP ({generatedImages.length})
                 </Button>
               </div>
 
               {isGenerating && (
                 <div className="space-y-2">
                   <Progress value={progress} className="h-1.5 bg-secondary" />
+                  <p className="text-[10px] text-center text-primary animate-pulse">CAPTURING FRAME {generatedImages.length + 1}...</p>
                 </div>
               )}
             </div>
@@ -146,12 +160,12 @@ export default function Generator() {
           <div className="border border-border bg-black p-4 rounded-lg h-[400px] overflow-hidden flex flex-col font-mono text-sm shadow-2xl">
             <ScrollArea className="flex-1">
               <div className="space-y-1 text-green-500 font-bold">
-                <p>{">"} SYSTEM_V5: ACTIVE</p>
+                <p>{">"} ENGINE_V6: READY</p>
                 {generatedImages.map((_, i) => (
-                  <p key={i}>{">"} IMAGE_{i + 1}: CAPTURED</p>
+                  <p key={i}>{">"} DATA_LOCK: receipt_{i + 1}.jpg [SUCCESS]</p>
                 ))}
-                {generatedImages.length === 10 && !isGenerating && (
-                  <p className="text-white bg-primary px-2 mt-2 inline-block">DOWNLOAD READY</p>
+                {generatedImages.length > 0 && !isGenerating && (
+                  <p className="text-white bg-primary px-2 mt-2 inline-block">SUCCESS: {generatedImages.length} ASSETS READY FOR EXPORT</p>
                 )}
               </div>
             </ScrollArea>
@@ -159,6 +173,8 @@ export default function Generator() {
         </div>
 
         <div className="border border-border bg-secondary/5 rounded-lg p-8 flex flex-col items-center justify-center min-h-[800px]">
+          <div className="absolute top-4 left-4 text-[10px] text-muted-foreground uppercase font-black">Live Production Engine</div>
+          
           {currentProcessingIndex >= 0 && transactions[currentProcessingIndex] && (
              <div className="shadow-[0_0_100px_rgba(0,0,0,0.5)] bg-white">
                <Receipt 
@@ -172,13 +188,11 @@ export default function Generator() {
 
           {!isGenerating && generatedImages.length > 0 && (
             <div className="flex flex-col items-center">
-              <div className="flex items-center gap-4 text-primary font-black text-3xl mb-8 italic uppercase tracking-tighter">
-                <CheckCircle2 size={40} className="text-green-500" />
-                Batch Ready
-              </div>
-              <div className="grid grid-cols-5 gap-4 scale-[0.6]">
-                {generatedImages.map((img, i) => (
-                  <img key={i} src={img} className="w-24 border-4 border-white shadow-xl" />
+              <CheckCircle2 size={48} className="text-green-500 mb-6 shadow-green-500/20 shadow-lg" />
+              <p className="text-2xl font-black text-primary mb-6 tracking-tighter uppercase italic">Batch Process Complete</p>
+              <div className="grid grid-cols-5 gap-3 scale-[0.55]">
+                {generatedImages.slice(-15).map((img, i) => (
+                  <img key={i} src={img} className="w-24 border-2 border-primary/20 shadow-lg" />
                 ))}
               </div>
             </div>
