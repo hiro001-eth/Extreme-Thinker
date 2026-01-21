@@ -14,6 +14,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
+  // Exact mobile-matching colors from screenshot
   const primaryColor = "#012a1c"; 
 
   return (
@@ -27,7 +28,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         color: primaryColor
       }}
     >
-      {/* Top Navigation Bar (The one with back arrow and dots) */}
+      {/* Top Navigation Bar */}
       <div className="w-full flex justify-between items-center px-6 pt-10 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -64,7 +65,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         </div>
       </div>
 
-      {/* Status Footer */}
+      {/* Status Footer - MATCHED FONT AND COLOR */}
       <div className="absolute bottom-[84px] flex items-center gap-2.5">
         <div className="w-[26px] h-[26px] rounded-full border-[2px] border-[#012a1c] flex items-center justify-center">
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
