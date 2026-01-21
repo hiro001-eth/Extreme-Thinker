@@ -21,7 +21,7 @@ export default function Generator() {
     setProgress(0);
     setGeneratedImages([]);
     
-    // Generate only 10 transactions as requested for faster check
+    // Generate only 10 transactions as requested
     const fullData = generateTransactions();
     const data = fullData.slice(0, 10); 
     setTransactions(data);
@@ -38,7 +38,8 @@ export default function Generator() {
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Wait for render
+    await new Promise(resolve => setTimeout(resolve, 200));
     
     const element = document.getElementById("receipt-capture-target");
     if (element) {
@@ -47,7 +48,9 @@ export default function Generator() {
           scale: 3, 
           logging: false,
           useCORS: true,
-          backgroundColor: "#ffffff"
+          backgroundColor: "#ffffff",
+          windowWidth: 360,
+          windowHeight: 740
         });
         
         const dataUrl = canvas.toDataURL("image/jpeg", 1.0);
@@ -70,15 +73,29 @@ export default function Generator() {
     }
   }, [currentProcessingIndex, isGenerating]);
 
-  const handleDownload = async () => {
-    const zip = new JSZip();
-    generatedImages.forEach((dataUrl, i) => {
-      const base64Data = dataUrl.replace(/^data:image\/jpeg;base64,/, "");
-      const fileName = `receipt_${i + 1}.jpg`;
-      zip.file(fileName, base64Data, { base64: true });
-    });
-    const content = await zip.generateAsync({ type: "blob" });
-    saveAs(content, "transactions_batch.zip");
+  const handleDownloadZip = async () => {
+    if (generatedImages.length === 0) return;
+    
+    try {
+      const zip = new JSZip();
+      
+      for (let i = 0; i < generatedImages.length; i++) {
+        const dataUrl = generatedImages[i];
+        const base64Data = dataUrl.split(',')[1];
+        const fileName = `receipt_${i + 1}.jpg`;
+        zip.file(fileName, base64Data, { base64: true });
+      }
+      
+      const blob = await zip.generateAsync({ 
+        type: "blob",
+        compression: "DEFLATE",
+        compressionOptions: { level: 9 }
+      });
+      
+      saveAs(blob, "transactions_batch_10.zip");
+    } catch (error) {
+      console.error("Zip generation failed", error);
+    }
   };
 
   return (
@@ -106,17 +123,23 @@ export default function Generator() {
                 </Button>
                 
                 <Button 
-                  onClick={handleDownload} 
+                  onClick={handleDownloadZip} 
                   disabled={generatedImages.length === 0 || isGenerating}
                   variant="outline"
-                  className="w-full text-lg h-12"
+                  className="w-full text-lg h-12 border-primary/50 text-primary hover:bg-primary/10"
                 >
                   <Download className="mr-2" /> DOWNLOAD ZIP
                 </Button>
               </div>
 
               {isGenerating && (
-                <Progress value={progress} className="h-2 bg-secondary" />
+                <div className="space-y-2">
+                  <div className="flex justify-between text-[10px] text-primary">
+                    <span>PROGRESS</span>
+                    <span>{Math.round(progress)}%</span>
+                  </div>
+                  <Progress value={progress} className="h-1 bg-secondary" />
+                </div>
               )}
             </div>
           </div>
@@ -126,10 +149,10 @@ export default function Generator() {
               <div className="space-y-1 text-green-500">
                 <p>{">"} System V2 Online...</p>
                 {generatedImages.map((_, i) => (
-                  <p key={i}>{">"} Processing Receipt {i + 1}/10... [SUCCESS]</p>
+                  <p key={i}>{">"} Captured Image {i + 1}/10... [OK]</p>
                 ))}
                 {generatedImages.length === 10 && !isGenerating && (
-                  <p className="text-white font-bold">{">"} BATCH COMPLETE. ZIP READY.</p>
+                  <p className="text-white font-bold animate-pulse">{">"} BATCH READY. CLICK DOWNLOAD.</p>
                 )}
               </div>
             </ScrollArea>
@@ -138,7 +161,7 @@ export default function Generator() {
 
         <div className="border border-border bg-secondary/10 rounded-lg p-8 flex flex-col items-center justify-center min-h-[800px]">
           {currentProcessingIndex >= 0 && transactions[currentProcessingIndex] && (
-             <div className="scale-[0.8] origin-center shadow-2xl">
+             <div className="scale-[0.8] origin-center shadow-2xl bg-white">
                <Receipt 
                  id="receipt-capture-target"
                  amount={transactions[currentProcessingIndex].amount}
@@ -151,10 +174,10 @@ export default function Generator() {
           {!isGenerating && generatedImages.length > 0 && (
             <div className="flex flex-col items-center">
               <CheckCircle2 size={48} className="text-green-500 mb-4" />
-              <p className="text-xl font-bold text-primary mb-4">10 IMAGES CAPTURED</p>
-              <div className="grid grid-cols-5 gap-2 scale-50">
-                {generatedImages.map((img, i) => (
-                  <img key={i} src={img} className="w-20 border border-white/20" />
+              <p className="text-xl font-bold text-primary mb-4 uppercase tracking-tighter">10 Images Ready</p>
+              <div className="grid grid-cols-5 gap-2 scale-75">
+                {generatedImages.slice(0, 5).map((img, i) => (
+                  <img key={i} src={img} className="w-16 border border-white/20" />
                 ))}
               </div>
             </div>
