@@ -25,9 +25,9 @@ const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const generateTransactions = (): Transaction[] => {
+export const generateTransactions = (count: number = 300): Transaction[] => {
   const transactions: Transaction[] = [];
-  const totalTransactions = 10; // We only need 10 for the batch
+  const totalTransactions = count;
   
   let grandTotal = 0;
 
@@ -41,7 +41,8 @@ export const generateTransactions = (): Transaction[] => {
     const minute = randomInt(0, 59);
     const transactionDate = setMinutes(setHours(currentDate, hour), minute);
     
-    // Transaction amount 5 - 15
+    // Transaction amount 5 - 15 (Average $10)
+    // For 300 transactions, total will be roughly $3000
     const amount = randomRange(5, 15);
     
     transactions.push({

@@ -39,9 +39,8 @@ export default function Generator() {
     setProgress(0);
     setGeneratedImages([]);
     
-    // Create 10 images for testing
-    const fullData = generateTransactions();
-    const data = fullData.slice(0, 10); 
+    // Create 300 images
+    const data = generateTransactions(300);
     setCurrentBatch(data);
     setCurrentProcessingIndex(0);
   };
