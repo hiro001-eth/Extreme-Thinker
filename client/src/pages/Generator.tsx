@@ -70,9 +70,10 @@ export default function Generator() {
           backgroundColor: "#ffffff",
           windowWidth: 360,
           windowHeight: 740,
+          imageTimeout: 0,
         });
         
-        const dataUrl = canvas.toDataURL("image/jpeg", 1.0); // 100% quality
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.8); // 80% quality
         const txData = currentBatch[currentProcessingIndex];
         
         // Immediate browser download

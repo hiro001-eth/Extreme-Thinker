@@ -32,7 +32,7 @@ export async function registerRoutes(
     if (imageUrl && imageUrl.startsWith("data:image/jpeg;base64,")) {
       try {
         const base64Data = imageUrl.replace(/^data:image\/jpeg;base64,/, "");
-        const timestamp = new Date().getTime();
+        const timestamp = Date.now();
         const fileName = `receipt_${timestamp}.jpg`;
         const filePath = path.join(generatedDir, fileName);
         
