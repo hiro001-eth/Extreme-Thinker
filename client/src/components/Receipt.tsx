@@ -74,12 +74,13 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
       </div>
 
       {/* Status Footer */}
-      <div className="absolute bottom-[84px] flex items-center justify-center">
-        <div className="w-[26px] h-[26px] rounded-full border-[2px] border-[#012a1c] flex items-center justify-center">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
+      <div className="absolute bottom-[84px] flex items-center justify-center gap-2.5">
+        <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#012a1c] flex items-center justify-center">
+             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
              </svg>
         </div>
+        <span className="text-[19px] font-medium tracking-tight text-[#012a1c]">Complete</span>
       </div>
 
       {/* Real Samsung Navigation Bar */}
