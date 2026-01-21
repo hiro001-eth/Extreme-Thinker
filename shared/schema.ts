@@ -9,6 +9,24 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
 });
 
+export const transactions = pgTable("transactions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  amount: text("amount").notNull(),
+  remarks: text("remarks").notNull(),
+  date: text("date").notNull(),
+  time: text("time").notNull(),
+  imageUrl: text("image_url"),
+  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const insertTransactionSchema = createInsertSchema(transactions).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertTransaction = z.infer<typeof insertTransactionSchema>;
+export type Transaction = typeof transactions.$inferSelect;
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
