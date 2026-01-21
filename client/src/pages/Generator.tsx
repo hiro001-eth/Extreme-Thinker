@@ -57,7 +57,7 @@ export default function Generator() {
     }
 
     // Wait for the DOM to settle
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 50));
     
     const element = document.getElementById("receipt-capture-target");
     if (element) {
@@ -117,7 +117,7 @@ export default function Generator() {
     for (let i = 0; i < generatedImages.length; i++) {
       const item = generatedImages[i];
       saveAs(item.url, `screenshot_${item.id}.jpg`);
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 50));
     }
     
     console.log("All downloads initiated.");
