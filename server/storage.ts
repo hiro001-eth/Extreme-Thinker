@@ -1,5 +1,6 @@
-import { type User, type InsertUser, type Transaction, type InsertTransaction } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { transactions, type User, type InsertUser, type Transaction, type InsertTransaction } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -11,49 +12,30 @@ export interface IStorage {
   createTransaction(transaction: InsertTransaction): Promise<Transaction>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private transactions: Map<string, Transaction>;
-
-  constructor() {
-    this.users = new Map();
-    this.transactions = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    return undefined; // Not used in current flow
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    return undefined; // Not used in current flow
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    throw new Error("Not implemented");
   }
 
   async getTransactions(): Promise<Transaction[]> {
-    return Array.from(this.transactions.values()).sort((a, b) => 
-      (b.createdAt || "").localeCompare(a.createdAt || "")
-    );
+    return await db.select().from(transactions).orderBy(desc(transactions.createdAt));
   }
 
   async createTransaction(insertTransaction: InsertTransaction): Promise<Transaction> {
-    const id = randomUUID();
-    const transaction: Transaction = { 
-      ...insertTransaction, 
-      id,
-      imageUrl: insertTransaction.imageUrl ?? null,
-      createdAt: new Date().toISOString()
-    };
-    this.transactions.set(id, transaction);
+    const [transaction] = await db
+      .insert(transactions)
+      .values(insertTransaction)
+      .returning();
     return transaction;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

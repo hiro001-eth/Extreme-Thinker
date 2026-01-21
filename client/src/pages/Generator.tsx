@@ -79,14 +79,14 @@ export default function Generator() {
 
         // Save to backend
         const savedTx = await mutation.mutateAsync({
-          amount: txData.amount,
-          date: txData.date,
+          amount: txData.amount.toString(),
+          date: txData.date.toISOString(),
           remarks: txData.remarks,
-          time: txData.time || "12:00 PM",
+          time: txData.time || format(txData.date, "h:mm a"),
           imageUrl: dataUrl
         });
 
-        setGeneratedImages(prev => [...prev, { url: dataUrl, id: savedTx.id }]);
+        setGeneratedImages(prev => [...prev, { url: savedTx.imageUrl || dataUrl, id: savedTx.id }]);
         
         const newProgress = ((currentProcessingIndex + 1) / currentBatch.length) * 100;
         setProgress(newProgress);

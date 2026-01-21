@@ -4,12 +4,17 @@ import { storage } from "./storage";
 import { insertTransactionSchema } from "@shared/schema";
 import fs from "fs/promises";
 import path from "path";
+import express from "express";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
   
+  // Serve generated images
+  const generatedDir = path.join(process.cwd(), "generated");
+  app.use("/generated", express.static(generatedDir));
+
   app.get("/api/transactions", async (_req, res) => {
     const transactions = await storage.getTransactions();
     res.json(transactions);
@@ -21,24 +26,27 @@ export async function registerRoutes(
       return res.status(400).json({ error: result.error });
     }
 
-    const { amount, date, remarks, time, imageUrl } = result.data;
+    let imageUrl = result.data.imageUrl;
 
     // Save image to file system if imageUrl is provided (base64)
     if (imageUrl && imageUrl.startsWith("data:image/jpeg;base64,")) {
       try {
         const base64Data = imageUrl.replace(/^data:image\/jpeg;base64,/, "");
-        const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+        const timestamp = new Date().getTime();
         const fileName = `receipt_${timestamp}.jpg`;
-        const filePath = path.join(process.cwd(), "images", fileName);
+        const filePath = path.join(generatedDir, fileName);
         
         await fs.writeFile(filePath, base64Data, "base64");
-        console.log(`Successfully saved image to: ${filePath}`);
+        imageUrl = `/generated/${fileName}`;
       } catch (err) {
         console.error("Failed to save image to disk:", err);
       }
     }
 
-    const transaction = await storage.createTransaction(result.data);
+    const transaction = await storage.createTransaction({
+      ...result.data,
+      imageUrl
+    });
     res.json(transaction);
   });
 
