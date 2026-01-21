@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
+import dollarLogo from "@assets/Untitled_design_1769013124818.png";
 
 interface ReceiptProps {
   amount: number;
@@ -14,7 +15,6 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
-  // Exact mobile-matching colors from screenshot
   const primaryColor = "#012a1c"; 
 
   return (
@@ -50,14 +50,22 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
 
       {/* Main Transaction Info */}
       <div className="mt-32 flex flex-col items-center">
-        <div className="flex items-start">
-          <span className="text-6xl font-bold mt-1 tracking-tighter">-$</span>
+        <div className="flex items-center">
+          <span className="text-6xl font-bold mt-1 tracking-tighter">-</span>
+          <img 
+            src={dollarLogo} 
+            alt="currency" 
+            className="w-14 h-14 object-contain mt-1"
+            style={{ filter: "brightness(0.2) sepia(1) hue-rotate(100deg) saturate(2)" }}
+          />
           <span className="text-[84px] font-bold leading-none tracking-tighter">{amountInt}</span>
-          <span className="text-3xl font-bold mt-2 tracking-tighter">{amountDec !== "00" ? amountDec : ""}</span>
+          {amountDec !== "00" && (
+            <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start">{amountDec}</span>
+          )}
         </div>
         
         <div className="mt-4 text-[17px] font-medium text-gray-700 tracking-tight">
-          For Food
+          {remarks}
         </div>
         
         <div className="mt-1 text-gray-500 text-[17px] font-medium tracking-tight">
@@ -65,7 +73,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         </div>
       </div>
 
-      {/* Status Footer - MATCHED FONT AND COLOR */}
+      {/* Status Footer */}
       <div className="absolute bottom-[84px] flex items-center gap-2.5">
         <div className="w-[26px] h-[26px] rounded-full border-[2px] border-[#012a1c] flex items-center justify-center">
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
