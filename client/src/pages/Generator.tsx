@@ -187,7 +187,46 @@ export default function Generator() {
           </div>
         </div>
 
-        
+        <div className="border border-neutral-800 bg-neutral-900/20 rounded-xl p-8 flex flex-col items-center justify-center min-h-[800px] relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.05),transparent)] pointer-events-none" />
+          
+          {currentProcessingIndex >= 0 && currentBatch[currentProcessingIndex] && (
+             <div className="shadow-[0_40px_100px_rgba(0,0,0,0.8)] scale-90 origin-center">
+               <Receipt 
+                 id="receipt-capture-target"
+                 amount={currentBatch[currentProcessingIndex].amount}
+                 date={currentBatch[currentProcessingIndex].date}
+                 remarks={currentBatch[currentProcessingIndex].remarks}
+               />
+             </div>
+          )}
+
+          {!isGenerating && generatedImages.length > 0 && (
+            <div className="flex flex-col items-center w-full max-w-md">
+              <div className="flex items-center gap-3 text-emerald-400 font-black text-2xl mb-10 tracking-tight uppercase italic">
+                <CheckCircle2 size={32} className="text-emerald-500" />
+                Capture Queue Ready
+              </div>
+              <div className="grid grid-cols-4 gap-4 w-full">
+                {generatedImages.map((img, i) => (
+                  <div key={i} className="group relative aspect-[9/16] rounded overflow-hidden border border-neutral-800 shadow-xl transition-all hover:scale-105 hover:z-10">
+                    <img src={img.url} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <Save className="text-white w-6 h-6" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {!isGenerating && generatedImages.length === 0 && (
+            <div className="flex flex-col items-center text-neutral-800 grayscale">
+              <Terminal size={120} className="mb-6 opacity-20" />
+              <p className="font-black tracking-[0.5em] text-2xl">AWAITING_INPUT</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
