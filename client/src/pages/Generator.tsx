@@ -70,13 +70,9 @@ export default function Generator() {
           windowHeight: 740,
         });
         
-        const dataUrl = canvas.toDataURL("image/jpeg", 1.0); // 100% quality
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
         const txData = currentBatch[currentProcessingIndex];
         
-        // Immediate browser download
-        const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-        saveAs(dataUrl, `receipt_${timestamp}.jpg`);
-
         // Save to backend
         const savedTx = await mutation.mutateAsync({
           amount: txData.amount,
