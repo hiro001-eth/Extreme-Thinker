@@ -55,7 +55,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-16 h-16 object-contain mt-2 mr-1"
+            className="w-20 h-20 object-contain mt-2 mr-1"
           />
           <span className="text-[84px] font-bold leading-none tracking-tighter">{amountInt}</span>
           {amountDec !== "00" && (
