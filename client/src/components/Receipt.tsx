@@ -65,7 +65,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         </div>
         
         <div className="mt-4 text-[17px] font-medium text-gray-700 tracking-tight">
-          {remarks}
+          For {remarks}
         </div>
         
         <div className="mt-1 text-gray-500 text-[17px] font-medium tracking-tight">
