@@ -19,10 +19,10 @@
 2. Open your browser to `http://localhost:5000`
 
 ## Automatic Image Saving
-When you generate images in the application, they are automatically sent to the server and saved in the `public/images` folder. You can find all your generated screenshots there in JPEG format.
+When you generate images in the application, they are automatically sent to the server and saved in the `images/` folder at the root of the project. You can find all your generated screenshots there in JPEG format.
 
 ## Folder Structure
 - `client/`: Frontend React application
 - `server/`: Backend Express server
 - `shared/`: Shared types and schemas
-- `public/images/`: Folder where generated screenshots are saved
+- `images/`: Folder where generated screenshots are saved
