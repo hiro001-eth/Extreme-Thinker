@@ -48,6 +48,7 @@ export class MemStorage implements IStorage {
     const transaction: Transaction = { 
       ...insertTransaction, 
       id,
+      imageUrl: insertTransaction.imageUrl ?? null,
       createdAt: new Date().toISOString()
     };
     this.transactions.set(id, transaction);
