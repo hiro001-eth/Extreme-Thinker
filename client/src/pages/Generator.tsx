@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Transaction } from "@shared/schema";
+import { format } from "date-fns";
 
 export default function Generator() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -65,6 +66,7 @@ export default function Generator() {
           scale: 3, 
           logging: false,
           useCORS: true,
+          allowTaint: true,
           backgroundColor: "#ffffff",
           windowWidth: 360,
           windowHeight: 740,
@@ -182,6 +184,37 @@ export default function Generator() {
                     Batch Ready! Click "SAVE NOW" to Download
                   </div>
                 )}
+              </div>
+            </ScrollArea>
+          </div>
+
+          <div className="border border-neutral-800 bg-neutral-900/50 p-6 rounded-xl backdrop-blur-sm shadow-2xl">
+            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <Save className="w-5 h-5 text-emerald-500" />
+              SAVED_DATABASE_METADATA
+            </h2>
+            <ScrollArea className="h-[200px]">
+              <div className="space-y-2">
+                {history.map((tx) => (
+                  <div key={tx.id} className="flex items-center justify-between p-2 border border-neutral-800 rounded bg-black/40 text-[10px]">
+                    <div className="flex flex-col">
+                      <span className="text-emerald-500 font-bold">{tx.remarks.toUpperCase()}</span>
+                      <span className="text-neutral-500">{tx.date} {tx.time}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-white font-black">${tx.amount}</span>
+                      {tx.imageUrl && (
+                        <a 
+                          href={tx.imageUrl} 
+                          download={`receipt_${tx.id}.jpg`}
+                          className="p-1 hover:bg-emerald-500/20 rounded transition-colors"
+                        >
+                          <Save size={14} className="text-emerald-500" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
             </ScrollArea>
           </div>
