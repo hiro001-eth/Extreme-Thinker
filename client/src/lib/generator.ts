@@ -51,6 +51,7 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     // Base amount that will be scaled later to meet targets
     let amount = randomRange(5, 15);
     const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
+    const selectedNavStyle = navStyles[randomInt(0, 2)];
 
     transactions.push({
       id: Math.random().toString(36).substr(2, 9),
@@ -60,7 +61,7 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
       batteryLevel: randomInt(1, 100),
       userName: user.name,
       userHandle: user.handle,
-      navStyle: navStyles[randomInt(0, 2)],
+      navStyle: selectedNavStyle,
       deviceBrand: brands[randomInt(0, brands.length - 1)],
       useCents: transactions.length > 20 && Math.random() < 0.05,
     });
