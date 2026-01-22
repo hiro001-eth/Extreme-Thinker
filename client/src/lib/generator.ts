@@ -9,6 +9,7 @@ export interface Transaction {
   userName: string;
   userHandle: string;
   navStyle: 'buttons' | 'swipe' | 'none';
+  useCents?: boolean;
 }
 
 const REMARKS = [
@@ -76,6 +77,7 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
         userName: user.name,
         userHandle: user.handle,
         navStyle: navStyles[randomInt(0, 2)],
+        useCents: transactions.length + i > 20 && Math.random() < 0.05, // Rare cents after 20 images
       });
       userTotal += amount;
     }

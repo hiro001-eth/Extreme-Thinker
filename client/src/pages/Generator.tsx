@@ -190,6 +190,7 @@ export default function Generator() {
                  userHandle={currentBatch[currentProcessingIndex].userHandle}
                  navStyle={currentBatch[currentProcessingIndex].navStyle}
                  batteryLevel={currentBatch[currentProcessingIndex].batteryLevel}
+                 useCents={currentBatch[currentProcessingIndex].useCents}
                />
              </div>
           )}

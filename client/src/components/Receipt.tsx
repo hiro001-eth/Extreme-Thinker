@@ -15,11 +15,12 @@ interface ReceiptProps {
   navStyle: 'buttons' | 'swipe' | 'none';
   id?: string;
   batteryLevel?: number;
+  useCents?: boolean;
 }
 
-export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle, id, batteryLevel = 95 }: ReceiptProps) => {
+export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle, id, batteryLevel = 95, useCents = false }: ReceiptProps) => {
   const amountInt = Math.floor(amount);
-  const amountDec = (amount % 1).toFixed(2).split(".")[1];
+  const amountDec = useCents ? (amount % 1).toFixed(2).split(".")[1] : null;
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
@@ -126,6 +127,9 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
             className="w-[44px] h-[44px] object-contain flex items-center mix-blend-multiply mt-[8px]"
           />
           <span className="text-[72px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-4px]">{amountInt}</span>
+          {amountDec && amountDec !== "00" && (
+            <span className="text-3xl font-bold mt-[14px] tracking-tighter self-start text-[#0d3a2b]">{amountDec}</span>
+          )}
         </div>
         
         <div className="mt-[-6px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
