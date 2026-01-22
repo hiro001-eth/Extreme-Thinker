@@ -28,6 +28,37 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
         color: primaryColor
       }}
     >
+      {/* Status Bar */}
+      <div className="w-full h-[34px] px-[18px] flex justify-between items-end pb-1.5 select-none opacity-90">
+        <div className="text-[14px] font-bold tracking-tight text-black/85">
+          {format(date, "h:mm")}
+        </div>
+        <div className="flex items-center gap-1.5">
+          {/* Signal */}
+          <div className="flex items-end gap-[1.5px] h-[11px] mb-[1px]">
+            <div className="w-[3px] h-[3px] bg-black/40 rounded-[0.5px]"></div>
+            <div className="w-[3px] h-[5px] bg-black/40 rounded-[0.5px]"></div>
+            <div className="w-[3px] h-[7px] bg-black/85 rounded-[0.5px]"></div>
+            <div className="w-[3px] h-[10px] bg-black/85 rounded-[0.5px]"></div>
+          </div>
+          {/* WiFi */}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mb-[1px]">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+            <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+            <line x1="12" y1="20" x2="12.01" y2="20" />
+          </svg>
+          {/* Battery */}
+          <div className="flex items-center gap-[2px]">
+             <div className="w-[22px] h-[11px] rounded-[2.5px] border-[1.2px] border-black/30 relative flex items-center px-[1.5px]">
+                <div className="h-[6px] w-[14px] bg-black/85 rounded-[1px]"></div>
+                <div className="absolute -right-[3.5px] w-[2px] h-[4px] bg-black/30 rounded-r-[1px]"></div>
+             </div>
+             <span className="text-[11px] font-bold text-black/85 ml-0.5">95</span>
+          </div>
+        </div>
+      </div>
+
       {/* Top Navigation Bar */}
       <div className="w-full flex justify-between items-center px-6 pt-10 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -51,11 +82,11 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
       {/* Main Transaction Info */}
       <div className="mt-32 flex flex-col items-center">
         <div className="flex items-center -ml-4">
-          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
+          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-6px]">-</span>
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-[54px] h-[72px] object-contain mt-3.5 mix-blend-multiply mr-[-4px]"
+            className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-4px]"
             style={{ filter: "contrast(1.2) brightness(1.1)" }}
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
