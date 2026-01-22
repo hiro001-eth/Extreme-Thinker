@@ -92,11 +92,11 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4 gap-0">
-          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-6px]">-</span>
+          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px]">-</span>
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM} 
             alt="currency" 
-            className="w-[54px] h-[72px] object-contain mt-[11px] mr-[-4px]"
+            className="w-[54px] h-[72px] object-contain mt-[11px] mr-[-10px]"
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
           {amountDec !== "00" && (
