@@ -87,7 +87,7 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       </div>
 
       {/* Main Transaction Info */}
-      <div className="mt-[168px] flex flex-col items-center">
+      <div className="flex-1 flex flex-col items-center justify-center -mt-10">
         <div className="flex items-center -ml-4">
           <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
           <img 
