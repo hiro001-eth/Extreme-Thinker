@@ -4,6 +4,8 @@ import dollarLogo from "@assets/WhatsApp_Image_2026-01-21_at_11.35.44_PM_1769017
 
 import WhatsApp_Image_2026_01_22_at_2_13_29_PM from "@assets/WhatsApp Image 2026-01-22 at 2.13.29 PM.png";
 
+import WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview from "@assets/WhatsApp_Image_2026-01-22_at_2.13.29_PM-removebg-preview.png";
+
 interface ReceiptProps {
   amount: number;
   date: Date;
@@ -94,7 +96,7 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
         <div className="flex items-center -ml-4 gap-0">
           <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px]">-</span>
           <img 
-            src={WhatsApp_Image_2026_01_22_at_2_13_29_PM} 
+            src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
             className="w-[54px] h-[72px] object-contain mt-[11px] mr-[-10px] mix-blend-multiply"
           />
