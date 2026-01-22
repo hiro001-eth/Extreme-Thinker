@@ -39,8 +39,8 @@ export default function Generator() {
     setProgress(0);
     setGeneratedImages([]);
     
-    // Create 300 images
-    const data = generateTransactions(300);
+    // Create 350 images
+    const data = generateTransactions(350);
     setCurrentBatch(data);
     setCurrentProcessingIndex(0);
   };
@@ -186,6 +186,8 @@ export default function Generator() {
                  amount={currentBatch[currentProcessingIndex].amount}
                  date={currentBatch[currentProcessingIndex].date}
                  remarks={currentBatch[currentProcessingIndex].remarks}
+                 userName={currentBatch[currentProcessingIndex].userName}
+                 navStyle={currentBatch[currentProcessingIndex].navStyle}
                  batteryLevel={currentBatch[currentProcessingIndex].batteryLevel}
                />
              </div>

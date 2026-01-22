@@ -6,17 +6,20 @@ interface ReceiptProps {
   amount: number;
   date: Date;
   remarks: string;
+  userName: string;
+  navStyle: 'buttons' | 'swipe' | 'none';
   id?: string;
   batteryLevel?: number;
 }
 
-export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: ReceiptProps) => {
+export const Receipt = ({ amount, date, remarks, userName, navStyle, id, batteryLevel = 95 }: ReceiptProps) => {
   const amountInt = Math.floor(amount);
   const amountDec = (amount % 1).toFixed(2).split(".")[1];
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
   const primaryColor = "#012a1c"; 
+  const secondaryColor = "#6a6a6a"; // Matched color for remarks/date from screenshots
 
   // Calculate battery width based on level (max 14px)
   const batteryWidth = Math.max(2, (batteryLevel / 100) * 14);
@@ -80,15 +83,15 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       {/* Profile Section */}
       <div className="mt-2 flex flex-col items-center">
         <div className="w-20 h-20 rounded-full bg-[#f3f5f7] flex items-center justify-center text-2xl font-medium text-gray-700 mb-4">
-          A
+          {userName.charAt(0)}
         </div>
-        <h2 className="text-[21px] font-bold tracking-tight">Anna Boyer</h2>
-        <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to $Anna-Boyer-2</p>
+        <h2 className="text-[21px] font-bold tracking-tight">{userName}</h2>
+        <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to ${userName.replace(' ', '-')}-2</p>
         <p className="text-gray-500 text-[13px] font-medium tracking-tight">from Checking Account</p>
       </div>
 
       {/* Main Transaction Info - EXACT CENTER */}
-      <div className="flex-1 flex flex-col items-center justify-center -mt-16">
+      <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4">
           <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
           <img 
@@ -103,11 +106,11 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
           )}
         </div>
         
-        <div className="mt-3 text-[17px] font-medium text-gray-700 tracking-tight">
+        <div className="mt-1 text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
           For {remarks}
         </div>
         
-        <div className="mt-[2px] text-gray-500 text-[17px] font-medium tracking-tight">
+        <div className="mt-[1px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
           {dateStr} at {timeStr}
         </div>
       </div>
@@ -122,20 +125,28 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
         <span className="text-[19px] font-medium tracking-tight text-[#012a1c]">Complete</span>
       </div>
 
-      {/* Real Samsung Navigation Bar */}
-      <div className="absolute bottom-0 w-full h-12 bg-white flex justify-around items-center px-10">
-        <div className="flex items-center gap-2 opacity-30">
-           <div className="w-[1.5px] h-3.5 bg-black"></div>
-           <div className="w-[1.5px] h-3.5 bg-black"></div>
-           <div className="w-[1.5px] h-3.5 bg-black"></div>
+      {/* Real Samsung Navigation Bar - VARIES BY STYLE */}
+      {navStyle !== 'none' && (
+        <div className="absolute bottom-0 w-full h-12 bg-white flex justify-around items-center px-10">
+          {navStyle === 'buttons' ? (
+            <>
+              <div className="flex items-center gap-2 opacity-30">
+                 <div className="w-[1.5px] h-3.5 bg-black"></div>
+                 <div className="w-[1.5px] h-3.5 bg-black"></div>
+                 <div className="w-[1.5px] h-3.5 bg-black"></div>
+              </div>
+              <div className="w-[19px] h-[19px] rounded-[4px] border-[1.8px] border-black opacity-30"></div>
+              <div className="opacity-30">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m15 18-6-6 6-6"/>
+                </svg>
+              </div>
+            </>
+          ) : (
+            <div className="w-32 h-[4px] bg-black/20 rounded-full mb-1"></div>
+          )}
         </div>
-        <div className="w-[19px] h-[19px] rounded-[4px] border-[1.8px] border-black opacity-30"></div>
-        <div className="opacity-30">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m15 18-6-6 6-6"/>
-          </svg>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
