@@ -177,35 +177,47 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           {dateStr} at {timeStr}
         </div>
       </div>
-      {/* Bottom Navigation Bar */}
-      {navStyle !== 'none' && (
-        <div className="w-full h-12 flex justify-center items-center px-10">
-          {navStyle === 'buttons' ? (
-            <div className={`w-full flex justify-around items-center opacity-30 ${isAngela ? 'invert' : ''}`}>
-              <div className="flex flex-col gap-[2px]">
-                <div className="w-[1.5px] h-3.5 bg-current"></div>
-                <div className="w-[1.5px] h-3.5 bg-current ml-[4px]"></div>
-                <div className="w-[1.5px] h-3.5 bg-current ml-[8px]"></div>
-              </div>
-              <div className="w-[19px] h-[19px] rounded-[4px] border-[1.8px] border-current"></div>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m15 18-6-6 6-6"/>
-              </svg>
-            </div>
-          ) : navStyle === 'swipe' ? (
-            <div className={`w-32 h-[4px] ${isAngela ? 'bg-white/20' : 'bg-black/20'} rounded-full mb-2`}></div>
-          ) : (
-            <div className={`w-full flex justify-around items-center opacity-30 ${isAngela ? 'invert' : ''}`}>
-               {/* Xiaomi Style */}
-               <div className="w-4 h-4 rounded-full border-2 border-current"></div>
-               <div className="w-4 h-4 rounded-[4px] border-2 border-current"></div>
-               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                 <path d="M15 18l-6-6 6-6"/>
+
+      {/* Status Footer - RESTORED & POSITIONED ABOVE NAV */}
+      <div className="w-full flex flex-col items-center pb-2">
+        <div className="flex items-center gap-2.5 mb-6">
+          <div className={`w-[26px] h-[26px] rounded-full border-[1.8px] ${isAngela ? 'border-emerald-400' : 'border-[#0d3a2b]'} flex items-center justify-center ${isAngela ? 'bg-emerald-400/10' : 'bg-transparent'}`}>
+               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={isAngela ? '#34d399' : '#0d3a2b'} strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
                </svg>
-            </div>
-          )}
+          </div>
+          <span className="text-[17px] font-medium tracking-tight">Complete</span>
         </div>
-      )}
+
+        {/* Bottom Navigation Bar */}
+        {navStyle !== 'none' && (
+          <div className="w-full h-10 flex justify-center items-center px-10">
+            {navStyle === 'buttons' ? (
+              <div className={`w-full flex justify-around items-center opacity-25 ${isAngela ? 'invert' : ''}`}>
+                <div className="flex flex-col gap-[2px]">
+                  <div className="w-[1.2px] h-3 bg-current"></div>
+                  <div className="w-[1.2px] h-3 bg-current ml-[4px]"></div>
+                  <div className="w-[1.2px] h-3 bg-current ml-[8px]"></div>
+                </div>
+                <div className="w-4 h-4 rounded-[3px] border-[1.5px] border-current"></div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </div>
+            ) : navStyle === 'swipe' ? (
+              <div className={`w-32 h-[3.5px] ${isAngela ? 'bg-white/10' : 'bg-black/10'} rounded-full mb-1`}></div>
+            ) : (
+              <div className={`w-full flex justify-around items-center opacity-25 ${isAngela ? 'invert' : ''}`}>
+                <div className="w-3.5 h-3.5 rounded-full border-[1.5px] border-current"></div>
+                <div className="w-3.5 h-3.5 rounded-[3px] border-[1.5px] border-current"></div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
