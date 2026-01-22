@@ -9,6 +9,7 @@ export interface Transaction {
   userName: string;
   userHandle: string;
   navStyle: 'buttons' | 'swipe' | 'none';
+  deviceBrand: 'apple' | 'samsung' | 'oppo' | 'xiaomi' | 'vivo';
   useCents?: boolean;
 }
 
@@ -37,6 +38,8 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     { name: "Angela Champagne", handle: "Angela-Champagne-4", targetMin: 1400, targetMax: 1750 }
   ];
 
+  const brands: ('apple' | 'samsung' | 'oppo' | 'xiaomi' | 'vivo')[] = ['apple', 'samsung', 'oppo', 'xiaomi', 'vivo'];
+
   for (let i = 0; i < count; i++) {
     const user = users[randomInt(0, users.length - 1)];
     const day = FIXED_DATES[randomInt(0, FIXED_DATES.length - 1)];
@@ -58,6 +61,7 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
       userName: user.name,
       userHandle: user.handle,
       navStyle: navStyles[randomInt(0, 2)],
+      deviceBrand: brands[randomInt(0, brands.length - 1)],
       useCents: transactions.length > 20 && Math.random() < 0.05,
     });
   }
