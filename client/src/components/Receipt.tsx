@@ -106,19 +106,19 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           )}
         </div>
         
-        <div className="mt-[-2px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
+        <div className="mt-[-6px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
           For {remarks}
         </div>
         
-        <div className="mt-[-2px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
+        <div className="mt-[-6px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
           {dateStr} at {timeStr}
         </div>
       </div>
 
       {/* Status Footer */}
       <div className="w-full flex items-center justify-center gap-2.5 pb-[64px]">
-        <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#0d3a2b] flex items-center justify-center">
-             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d3a2b" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+        <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#10b981] flex items-center justify-center bg-[#10b981]/5">
+             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
              </svg>
         </div>
