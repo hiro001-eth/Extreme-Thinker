@@ -93,8 +93,11 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
             <path d="M1.42 9a16 16 0 0 1 21.16 0" />
             <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
           </svg>
-          <div className="w-[18px] h-[10px] rounded-[1px] border border-black/30 relative flex items-center px-[1px]">
-             <div className="h-[6px] bg-black/70 rounded-[0.5px]" style={{ width: `${(batteryLevel / 100) * 14}px` }}></div>
+          <div className="flex items-center gap-[2px]">
+             <span className="text-[11px] font-bold text-black/85 mr-0.5">{batteryLevel}%</span>
+             <div className="w-[18px] h-[10px] rounded-[1px] border border-black/30 relative flex items-center px-[1px]">
+                <div className="h-[6px] bg-black/70 rounded-[0.5px]" style={{ width: `${(batteryLevel / 100) * 14}px` }}></div>
+             </div>
           </div>
         </div>
       </div>
