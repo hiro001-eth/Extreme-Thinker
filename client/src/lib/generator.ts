@@ -33,48 +33,46 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
   const transactions: Transaction[] = [];
   
   const users = [
-    { name: "Anna Boyer", handle: "Anna-Boyer-2", targetMin: 1400, targetMax: 1750, count: Math.floor(count / 2) },
-    { name: "Angela Champagne", handle: "Angela-Champagne-4", targetMin: 1400, targetMax: 1750, count: count - Math.floor(count / 2) }
+    { name: "Anna Boyer", handle: "Anna-Boyer-2", targetMin: 1400, targetMax: 1750 },
+    { name: "Angela Champagne", handle: "Angela-Champagne-4", targetMin: 1400, targetMax: 1750 }
   ];
 
+  for (let i = 0; i < count; i++) {
+    const user = users[randomInt(0, users.length - 1)];
+    const day = FIXED_DATES[randomInt(0, FIXED_DATES.length - 1)];
+    const currentDate = new Date(2026, 0, day);
+    const hour = randomInt(8, 22);
+    const minute = randomInt(0, 59);
+    const transactionDate = setMinutes(setHours(currentDate, hour), minute);
+    
+    // Base amount that will be scaled later to meet targets
+    let amount = randomRange(5, 15);
+    const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
+
+    transactions.push({
+      id: Math.random().toString(36).substr(2, 9),
+      amount: amount,
+      date: transactionDate,
+      remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
+      batteryLevel: randomInt(1, 100),
+      userName: user.name,
+      userHandle: user.handle,
+      navStyle: navStyles[randomInt(0, 2)],
+      useCents: transactions.length > 20 && Math.random() < 0.05,
+    });
+  }
+
+  // Final scale to hit targets for each user
   users.forEach(user => {
-    let userTotal = 0;
-    const userTransactions: Transaction[] = [];
+    const userTxs = transactions.filter(t => t.userHandle === user.handle);
+    const currentTotal = userTxs.reduce((sum, t) => sum + t.amount, 0);
+    const target = randomRange(user.targetMin, user.targetMax);
+    const scale = target / currentTotal;
     
-    for (let i = 0; i < user.count; i++) {
-      // Pick a random day from our allowed January dates
-      const day = FIXED_DATES[randomInt(0, FIXED_DATES.length - 1)];
-      const currentDate = new Date(2026, 0, day);
-      const hour = randomInt(8, 22);
-      const minute = randomInt(0, 59);
-      const transactionDate = setMinutes(setHours(currentDate, hour), minute);
-      
-      let amount = randomRange(5, 15);
-      const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
-
-      userTransactions.push({
-        id: Math.random().toString(36).substr(2, 9),
-        amount: amount,
-        date: transactionDate,
-        remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
-        batteryLevel: randomInt(1, 100),
-        userName: user.name,
-        userHandle: user.handle,
-        navStyle: navStyles[randomInt(0, 2)],
-        useCents: transactions.length + userTransactions.length > 20 && Math.random() < 0.05,
-      });
-      userTotal += amount;
-    }
-
-    const currentTarget = randomRange(user.targetMin, user.targetMax);
-    const scaleFactor = currentTarget / userTotal;
-    
-    userTransactions.forEach(t => {
-      t.amount = parseFloat((t.amount * scaleFactor).toFixed(2));
-      transactions.push(t);
+    userTxs.forEach(t => {
+      t.amount = parseFloat((t.amount * scale).toFixed(2));
     });
   });
 
-  // Return in random order as requested instead of sorted by date
   return transactions;
 };
