@@ -27,21 +27,7 @@ const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const DATE_WEIGHTS_POOL: Record<number, number> = {
-  1: 1, 2: 1, 3: 1, 4: 1, 11: 1, 12: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1, 19: 1
-};
-
-const getWeightedRandomDay = () => {
-  const keys = Object.keys(DATE_WEIGHTS_POOL).map(Number);
-  const totalWeight = Object.values(DATE_WEIGHTS_POOL).reduce((a, b) => a + b, 0);
-  let random = Math.random() * totalWeight;
-  for (const day of keys) {
-    const weight = DATE_WEIGHTS_POOL[day];
-    random -= weight;
-    if (random <= 0) return day;
-  }
-  return keys[keys.length - 1];
-};
+const FIXED_DATES = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 export const generateTransactions = (count: number = 350): Transaction[] => {
   const transactions: Transaction[] = [];
@@ -54,31 +40,37 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
   users.forEach(user => {
     let userTotal = 0;
     const userTransactions: Transaction[] = [];
+    
+    // Distribute transactions evenly across the fixed dates
+    const txPerDay = Math.floor(user.count / FIXED_DATES.length);
+    const remainder = user.count % FIXED_DATES.length;
 
-    for (let i = 0; i < user.count; i++) {
-      const day = getWeightedRandomDay();
-      const currentDate = new Date(2026, 0, day);
-      const hour = randomInt(8, 22);
-      const minute = randomInt(0, 59);
-      const transactionDate = setMinutes(setHours(currentDate, hour), minute);
+    FIXED_DATES.forEach((day, index) => {
+      const dailyCount = txPerDay + (index < remainder ? 1 : 0);
       
-      let amount = randomRange(5, 15);
-      
-      const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
+      for (let i = 0; i < dailyCount; i++) {
+        const currentDate = new Date(2026, 0, day);
+        const hour = randomInt(8, 22);
+        const minute = randomInt(0, 59);
+        const transactionDate = setMinutes(setHours(currentDate, hour), minute);
+        
+        let amount = randomRange(5, 15);
+        const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
 
-      userTransactions.push({
-        id: Math.random().toString(36).substr(2, 9),
-        amount: amount,
-        date: transactionDate,
-        remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
-        batteryLevel: randomInt(1, 100),
-        userName: user.name,
-        userHandle: user.handle,
-        navStyle: navStyles[randomInt(0, 2)],
-        useCents: transactions.length + i > 20 && Math.random() < 0.05,
-      });
-      userTotal += amount;
-    }
+        userTransactions.push({
+          id: Math.random().toString(36).substr(2, 9),
+          amount: amount,
+          date: transactionDate,
+          remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
+          batteryLevel: randomInt(1, 100),
+          userName: user.name,
+          userHandle: user.handle,
+          navStyle: navStyles[randomInt(0, 2)],
+          useCents: transactions.length + userTransactions.length > 20 && Math.random() < 0.05,
+        });
+        userTotal += amount;
+      }
+    });
 
     const currentTarget = randomRange(user.targetMin, user.targetMax);
     const scaleFactor = currentTarget / userTotal;
