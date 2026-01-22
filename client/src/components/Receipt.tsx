@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { format } from "date-fns";
 import dollarLogo from "@assets/WhatsApp_Image_2026-01-21_at_11.35.44_PM_1769017900602.jpeg";
-import { Battery, Wifi, BellOff, VolumeX, MapPin, MessageCircle, Instagram, Mail, Bell, ShieldCheck, Facebook, Twitter, Phone, MessageSquare } from "lucide-react";
+import { Battery, Wifi, BellOff, VolumeX, MapPin, MessageCircle, Instagram, Mail, Bell, ShieldCheck, Facebook, Phone, MessageSquare, X } from "lucide-react";
 
 import WhatsApp_Image_2026_01_22_at_2_13_29_PM from "@assets/WhatsApp Image 2026-01-22 at 2.13.29 PM.png";
 
@@ -46,7 +46,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
       <Instagram className="h-3 w-3" />,
       <Mail className="h-3 w-3" />,
       <Facebook className="h-3 w-3 fill-current" />,
-      <Twitter className="h-3 w-3 fill-current" />,
+      <X className="h-2.5 w-2.5 stroke-[3]" />,
       <Phone className="h-3 w-3 fill-current" />,
       <MessageSquare className="h-3 w-3" />,
       <Bell className="h-3 w-3" />
