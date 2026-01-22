@@ -5,6 +5,7 @@ import dollarLogo from "@assets/WhatsApp_Image_2026-01-21_at_11.35.44_PM_1769017
 import WhatsApp_Image_2026_01_22_at_2_13_29_PM from "@assets/WhatsApp Image 2026-01-22 at 2.13.29 PM.png";
 
 import WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview from "@assets/WhatsApp_Image_2026-01-22_at_2.13.29_PM-removebg-preview.png";
+import WhatsApp_Image_2026_01_22_at_2_13_29_PM_dollar_sign from "@assets/WhatsApp_Image_2026-01-22_at_2.13.29_PM_1769075997170.jpg";
 
 interface ReceiptProps {
   amount: number;
@@ -116,7 +117,15 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           {userName.charAt(0)}
         </div>
         <h2 className="text-[21px] font-bold tracking-tight text-[#0d3a2b]">{userName}</h2>
-        <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to ${userHandle}</p>
+        <div className="flex items-center gap-0.5 mt-1">
+          <p className="text-gray-500 text-[13px] font-medium tracking-tight">Payment to</p>
+          <img 
+            src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_dollar_sign} 
+            alt="dollar" 
+            className="w-[10px] h-[10px] object-contain mix-blend-multiply"
+          />
+          <p className="text-gray-500 text-[13px] font-medium tracking-tight">{userHandle}</p>
+        </div>
         <p className="text-gray-500 text-[13px] font-medium tracking-tight">from Checking Account</p>
       </div>
       {/* Main Transaction Info - EXACT CENTER */}
