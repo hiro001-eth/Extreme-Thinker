@@ -68,7 +68,7 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       </div>
 
       {/* Top Navigation Bar */}
-      <div className="w-full flex justify-between items-center px-6 pt-10 pb-4">
+      <div className="w-full flex justify-between items-center px-6 pt-4 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
@@ -78,7 +78,7 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       </div>
 
       {/* Profile Section */}
-      <div className="mt-4 flex flex-col items-center">
+      <div className="mt-2 flex flex-col items-center">
         <div className="w-20 h-20 rounded-full bg-[#f3f5f7] flex items-center justify-center text-2xl font-medium text-gray-700 mb-4">
           A
         </div>
@@ -88,7 +88,7 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       </div>
 
       {/* Main Transaction Info - EXACT CENTER */}
-      <div className="flex-1 flex flex-col items-center justify-center">
+      <div className="flex-1 flex flex-col items-center justify-center -mt-16">
         <div className="flex items-center -ml-4">
           <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
           <img 
