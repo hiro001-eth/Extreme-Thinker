@@ -64,6 +64,28 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           </div>
         </div>
         <div className="flex items-center gap-1.5">
+          {/* Silent/Mute Icons */}
+          {Math.random() > 0.5 && (
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="opacity-70">
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z"/>
+            </svg>
+          )}
+          {Math.random() > 0.7 && (
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-70">
+              <line x1="1" y1="1" x2="23" y2="23" />
+              <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
+              <path d="M17 16.95A7 7 0 0 1 5 12v-2" />
+              <line x1="12" y1="19" x2="12" y2="23" />
+              <line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
+          )}
+          {/* Signal Towers */}
+          <div className="flex items-end gap-[1.5px] h-[10px] mb-[0.5px]">
+            <div className="w-[2.5px] h-[3px] bg-black/30 rounded-[0.5px]"></div>
+            <div className="w-[2.5px] h-[5px] bg-black/30 rounded-[0.5px]"></div>
+            <div className="w-[2.5px] h-[7px] bg-black/70 rounded-[0.5px]"></div>
+            <div className="w-[2.5px] h-[10px] bg-black/70 rounded-[0.5px]"></div>
+          </div>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
             <path d="M5 12.55a11 11 0 0 1 14.08 0" />
             <path d="M1.42 9a16 16 0 0 1 21.16 0" />
