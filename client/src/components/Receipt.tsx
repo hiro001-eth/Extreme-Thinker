@@ -93,7 +93,7 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-4px]"
+            className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-8px]"
             style={{ filter: "contrast(1.2) brightness(1.1)" }}
           />
           <span className="text-[76px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
