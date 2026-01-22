@@ -51,7 +51,9 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     // Base amount that will be scaled later to meet targets
     let amount = randomRange(5, 15);
     const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
-    const selectedNavStyle = navStyles[randomInt(0, 2)];
+    
+    // Each transaction in the batch gets its own random style
+    const selectedNavStyle = navStyles[Math.floor(Math.random() * 3)];
 
     transactions.push({
       id: Math.random().toString(36).substr(2, 9),

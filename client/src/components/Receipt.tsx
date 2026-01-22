@@ -177,30 +177,35 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           {dateStr} at {timeStr}
         </div>
       </div>
-      {/* Status Footer */}
-      <div className="w-full flex flex-col items-center gap-10 pb-[64px]">
-        <div className="flex items-center gap-2.5">
-          <div className={`w-[30px] h-[30px] rounded-full border-[1.8px] ${isAngela ? 'border-emerald-400' : 'border-[#10b981]'} flex items-center justify-center ${isAngela ? 'bg-emerald-400/10' : 'bg-[#10b981]/5'}`}>
-               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isAngela ? '#34d399' : '#10b981'} strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
+      {/* Bottom Navigation Bar */}
+      {navStyle !== 'none' && (
+        <div className="w-full h-12 flex justify-center items-center px-10">
+          {navStyle === 'buttons' ? (
+            <div className={`w-full flex justify-around items-center opacity-30 ${isAngela ? 'invert' : ''}`}>
+              <div className="flex flex-col gap-[2px]">
+                <div className="w-[1.5px] h-3.5 bg-current"></div>
+                <div className="w-[1.5px] h-3.5 bg-current ml-[4px]"></div>
+                <div className="w-[1.5px] h-3.5 bg-current ml-[8px]"></div>
+              </div>
+              <div className="w-[19px] h-[19px] rounded-[4px] border-[1.8px] border-current"></div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </div>
+          ) : navStyle === 'swipe' ? (
+            <div className={`w-32 h-[4px] ${isAngela ? 'bg-white/20' : 'bg-black/20'} rounded-full mb-2`}></div>
+          ) : (
+            <div className={`w-full flex justify-around items-center opacity-30 ${isAngela ? 'invert' : ''}`}>
+               {/* Xiaomi Style */}
+               <div className="w-4 h-4 rounded-full border-2 border-current"></div>
+               <div className="w-4 h-4 rounded-[4px] border-2 border-current"></div>
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                 <path d="M15 18l-6-6 6-6"/>
                </svg>
-          </div>
-          <span className="text-[19px] font-medium tracking-tight">Complete</span>
+            </div>
+          )}
         </div>
-        
-        {/* Android Navigation Bar */}
-        <div className="w-full flex justify-around items-center px-16 opacity-30">
-          <div className="flex flex-col gap-[2px]">
-            <div className="w-[1px] h-3 bg-current"></div>
-            <div className="w-[1px] h-3 bg-current ml-[4px]"></div>
-            <div className="w-[1px] h-3 bg-current ml-[8px]"></div>
-          </div>
-          <div className="w-4 h-4 rounded-[3px] border-2 border-current"></div>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m15 18-6-6 6-6"/>
-          </svg>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
