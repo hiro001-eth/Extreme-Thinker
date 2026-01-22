@@ -144,13 +144,13 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
         </div>
         <h2 className="text-[21px] font-bold tracking-tight">{userName}</h2>
         <div className="flex items-center mt-1">
-          <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight">Payment to</p>
+          <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight whitespace-nowrap">Payment to</p>
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="dollar" 
-            className={`w-[12px] h-[12px] object-contain mx-1 ${isAngela ? 'brightness-0 invert' : 'mix-blend-multiply'}`}
+            className={`w-[12px] h-[12px] object-contain ml-1 ${isAngela ? 'brightness-0 invert' : 'mix-blend-multiply'}`}
           />
-          <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight">{userHandle}</p>
+          <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight whitespace-nowrap">{userHandle}</p>
         </div>
         <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight">from Checking Account</p>
       </div>
