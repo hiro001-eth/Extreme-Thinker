@@ -98,7 +98,7 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
             src={dollarLogo} 
             alt="currency" 
             className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-12px]"
-            style={{ filter: "contrast(1.2) brightness(1.1) sepia(0.3) hue-rotate(100deg)" }}
+            style={{ filter: "contrast(1.2) brightness(0.2) sepia(1) hue-rotate(80deg) saturate(2)" }}
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
           {amountDec !== "00" && (
