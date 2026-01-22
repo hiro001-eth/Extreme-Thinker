@@ -7,6 +7,7 @@ export interface Transaction {
   remarks: string;
   batteryLevel: number;
   userName: string;
+  userHandle: string;
   navStyle: 'buttons' | 'swipe' | 'none';
 }
 
@@ -46,7 +47,8 @@ const getWeightedRandomDay = () => {
 export const generateTransactions = (count: number = 350): Transaction[] => {
   const transactions: Transaction[] = [];
   const users = [
-    { name: "Anna Boyer", targetMin: 3100, targetMax: 3500, count: count }
+    { name: "Anna Boyer", handle: "Anna-Boyer-2", targetMin: 1400, targetMax: 1750, count: Math.floor(count / 2) },
+    { name: "Angela Champagne", handle: "Angela-Champagne-1", targetMin: 1400, targetMax: 1750, count: count - Math.floor(count / 2) }
   ];
 
   users.forEach(user => {
@@ -54,7 +56,8 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     const userTransactions: Transaction[] = [];
 
     for (let i = 0; i < user.count; i++) {
-      const day = getWeightedRandomDay();
+      // Pick random day from weighted pool
+      const day = datePool[Math.floor(Math.random() * datePool.length)];
       const currentDate = new Date(2026, 0, day);
       const hour = randomInt(8, 22);
       const minute = randomInt(0, 59);
@@ -71,6 +74,7 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
         remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
         batteryLevel: randomInt(1, 100),
         userName: user.name,
+        userHandle: user.handle,
         navStyle: navStyles[randomInt(0, 2)],
       });
       userTotal += amount;

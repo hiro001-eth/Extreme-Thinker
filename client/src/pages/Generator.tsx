@@ -187,6 +187,7 @@ export default function Generator() {
                  date={currentBatch[currentProcessingIndex].date}
                  remarks={currentBatch[currentProcessingIndex].remarks}
                  userName={currentBatch[currentProcessingIndex].userName}
+                 userHandle={currentBatch[currentProcessingIndex].userHandle}
                  navStyle={currentBatch[currentProcessingIndex].navStyle}
                  batteryLevel={currentBatch[currentProcessingIndex].batteryLevel}
                />

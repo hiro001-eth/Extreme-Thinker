@@ -11,12 +11,13 @@ interface ReceiptProps {
   date: Date;
   remarks: string;
   userName: string;
+  userHandle: string;
   navStyle: 'buttons' | 'swipe' | 'none';
   id?: string;
   batteryLevel?: number;
 }
 
-export const Receipt = ({ amount, date, remarks, userName, navStyle, id, batteryLevel = 95 }: ReceiptProps) => {
+export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle, id, batteryLevel = 95 }: ReceiptProps) => {
   const amountInt = Math.floor(amount);
   const amountDec = (amount % 1).toFixed(2).split(".")[1];
   const dateStr = format(date, "MMM d");
@@ -112,7 +113,7 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           {userName.charAt(0)}
         </div>
         <h2 className="text-[21px] font-bold tracking-tight text-[#0d3a2b]">{userName}</h2>
-        <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to ${userName.replace(' ', '-')}-2</p>
+        <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to ${userHandle}</p>
         <p className="text-gray-500 text-[13px] font-medium tracking-tight">from Checking Account</p>
       </div>
       {/* Main Transaction Info - EXACT CENTER */}
