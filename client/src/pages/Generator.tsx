@@ -189,6 +189,7 @@ export default function Generator() {
                  userName={currentBatch[currentProcessingIndex].userName}
                  userHandle={currentBatch[currentProcessingIndex].userHandle}
                  navStyle={currentBatch[currentProcessingIndex].navStyle}
+                 deviceBrand={currentBatch[currentProcessingIndex].deviceBrand || 'samsung'}
                  batteryLevel={currentBatch[currentProcessingIndex].batteryLevel}
                  useCents={currentBatch[currentProcessingIndex].useCents}
                />
