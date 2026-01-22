@@ -78,7 +78,7 @@ export default function Generator() {
           allowTaint: true,
           backgroundColor: "#ffffff",
           windowWidth: 360,
-          windowHeight: 740,
+          windowHeight: 800,
           imageTimeout: 15000,
         });
         
