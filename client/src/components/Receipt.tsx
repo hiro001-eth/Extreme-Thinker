@@ -21,7 +21,7 @@ interface ReceiptProps {
   useCents?: boolean;
 }
 
-export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle, deviceBrand, id, batteryLevel = 95, useCents = false }: ReceiptProps) => {
+export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle, deviceBrand, id, batteryLevel: batteryLevelProp, useCents = false }: ReceiptProps) => {
   const amountInt = Math.floor(amount);
   const amountDec = useCents ? (amount % 1).toFixed(2).split(".")[1] : null;
   const dateStr = format(date, "MMM d");
@@ -32,67 +32,81 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
   const secondaryColor = isAngela ? "rgba(255,255,255,0.7)" : "#6a6a6a";
   const backgroundColor = isAngela ? "#0d1a14" : "#ffffff";
 
-  // Randomize signal and health per instance
-  const signalStrength = useMemo(() => Math.floor(Math.random() * 2) + 3, []); // 3 or 4 bars
-  const batteryHealth = useMemo(() => Math.floor(Math.random() * 20) + 80, []); // 80-100
-  
-  // Randomize layout tweaks
-  const layoutRandoms = useMemo(() => ({
-    iconGap: Math.floor(Math.random() * 3) + 1, // 1-3px
-    navOpacity: (Math.random() * 0.2 + 0.7).toFixed(2), // 0.7-0.9
-    timeOffset: Math.floor(Math.random() * 4) - 2, // -2 to 2px shift
-  }), []);
-
-  // Randomize notification icons with better variety
-  const notificationIcons = useMemo(() => {
-    const icons = [
+  // Deep Randomization (Figma UI/UX Standard)
+  const stats = useMemo(() => {
+    const batteryLevel = batteryLevelProp ?? Math.floor(Math.random() * 100) + 1;
+    const signalBars = Math.floor(Math.random() * 4) + 1;
+    const networkType = ["5G", "4G+", "LTE", "4G", "LTE+"][Math.floor(Math.random() * 5)];
+    const showLocation = Math.random() > 0.4;
+    const batteryHealth = Math.floor(Math.random() * 21) + 80; // 80-100%
+    
+    // Advanced notification logic
+    const allIcons = [
       <MessageCircle className="h-3 w-3 fill-current" />,
       <Instagram className="h-3 w-3" />,
-      <Mail className="h-[13px] w-[13px]" />,
-      <Bell className="h-3 w-3" />,
-      <ShieldCheck className="h-3 w-3" />,
+      <Mail className="h-3 w-3" />,
       <Facebook className="h-3 w-3 fill-current" />,
       <Twitter className="h-3 w-3 fill-current" />,
       <Phone className="h-3 w-3 fill-current" />,
-      <MessageSquare className="h-3 w-3" />
+      <MessageSquare className="h-3 w-3" />,
+      <Bell className="h-3 w-3" />
     ];
-    // Pick 0-4 random icons
-    return icons.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 5));
-  }, []);
+    
+    const notificationCount = Math.random() > 0.2 ? Math.floor(Math.random() * 4) : 0;
+    const selectedIcons = allIcons.sort(() => 0.5 - Math.random()).slice(0, notificationCount);
+    
+    return {
+      batteryLevel,
+      signalBars,
+      networkType,
+      showLocation,
+      batteryHealth,
+      selectedIcons,
+      layoutGap: Math.floor(Math.random() * 3) + 2,
+    };
+  }, [batteryLevelProp]);
 
   const renderNav = () => {
     const time = format(date, "h:mm");
-    const textColor = isAngela ? "text-white/90" : "text-black/85";
+    const textColor = isAngela ? "text-white/90" : "text-black/90";
 
     return (
-      <div className={`w-full h-7 px-4 pt-1 flex justify-between items-center text-[11.5px] font-semibold tracking-tight ${textColor}`} style={{ 
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-        opacity: layoutRandoms.navOpacity
+      <div className={`w-full h-7 px-4 pt-1.5 flex justify-between items-center text-[11px] font-bold tracking-tight ${textColor}`} style={{ 
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Roboto", sans-serif'
       }}>
-        <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap + 3}px` }}>
-          <span style={{ marginLeft: `${layoutRandoms.timeOffset}px` }}>{time}</span>
-          <div className="flex items-center opacity-70" style={{ gap: `${layoutRandoms.iconGap}px` }}>
-            {notificationIcons.map((icon, i) => (
+        {/* Left Section: Time + Notifications */}
+        <div className="flex items-center" style={{ gap: `${stats.layoutGap + 2}px` }}>
+          <span className="tabular-nums">{time}</span>
+          <div className="flex items-center opacity-80" style={{ gap: `${stats.layoutGap}px` }}>
+            {stats.selectedIcons.map((icon, i) => (
               <React.Fragment key={i}>{icon}</React.Fragment>
             ))}
           </div>
         </div>
 
-        <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap + 4}px` }}>
-          <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap}px` }}>
-            <MapPin className="h-[10px] w-[10px] opacity-70" />
+        {/* Right Section: Location + Network + Signal + Battery */}
+        <div className="flex items-center" style={{ gap: `${stats.layoutGap + 3}px` }}>
+          <div className="flex items-center" style={{ gap: `${stats.layoutGap}px` }}>
+            {stats.showLocation && <MapPin className="h-2.5 w-2.5 opacity-80" />}
+            <span className="text-[9px] font-black opacity-90">{stats.networkType}</span>
             <Wifi className="h-3 w-3 opacity-90" />
-            <div className="flex items-end gap-[1px] h-[8px] opacity-90">
-              {[3, 5, 7, 9].map((h, i) => (
-                <div key={i} className={`w-[2.5px] h-[${h}px] bg-current ${i + 1 > signalStrength ? 'opacity-30' : ''}`} />
+            <div className="flex items-end gap-[1px] h-[9px]">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className={`w-[2.5px] rounded-[0.5px] bg-current ${i > stats.signalBars ? 'opacity-30' : 'opacity-90'}`} style={{ height: `${i * 2 + 1}px` }} />
               ))}
             </div>
           </div>
-          <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap}px` }}>
-             <div className="px-1 py-0 bg-black/10 rounded-full text-[9px] font-black scale-90">{batteryHealth}</div>
-             <div className="relative w-5 h-[10px] border border-current/30 rounded-[2px] flex items-center px-[1px]">
-               <div className="h-[6px] bg-current/80 rounded-[0.5px]" style={{ width: `${(batteryLevel / 100) * 16}px` }} />
-               <div className="absolute -right-[2.5px] w-[1.5px] h-1 bg-current/30 rounded-r-full" />
+          
+          <div className="flex items-center" style={{ gap: `${stats.layoutGap}px` }}>
+             <div className="px-1 py-0 bg-black/5 rounded-full text-[8.5px] font-black opacity-70">
+               {stats.batteryHealth}
+             </div>
+             <div className="flex items-center gap-1">
+               <span className="tabular-nums text-[10px]">{stats.batteryLevel}%</span>
+               <div className="relative w-[19px] h-[9.5px] border border-current/30 rounded-[1.5px] flex items-center px-[0.5px]">
+                 <div className="h-[6.5px] bg-current/90 rounded-[0.5px]" style={{ width: `${(stats.batteryLevel / 100) * 16}px` }} />
+                 <div className="absolute -right-[2.5px] w-[1px] h-1 bg-current/40 rounded-r-full" />
+               </div>
              </div>
           </div>
         </div>
