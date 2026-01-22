@@ -13,12 +13,10 @@ export interface Transaction {
 }
 
 const REMARKS = [
-  "food", "gas", "pizza", "shop", "-",
-  "food", "gas", "pizza", "shop", "-",
-  "food", "gas", "pizza", "shop", "-",
-  "food", "gas", "pizza", "shop", "-",
-  "food", "gas", "pizza", "shop", "-",
-  "food", "lunch", "market", "groceries", "taxi", "coffee", "snacks"
+  "food", "food", "food", "food", "food",
+  "food", "food", "food", "food", "food",
+  "food", "food", "food", "food", "food",
+  "gas", "pizza", "shop", "-", "lunch", "market", "groceries", "taxi", "coffee", "snacks"
 ];
 
 const randomRange = (min: number, max: number) => {
