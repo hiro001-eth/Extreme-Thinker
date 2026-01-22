@@ -95,10 +95,9 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
         <div className="flex items-center -ml-4">
           <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-12px]">-</span>
           <img 
-            src={dollarLogo} 
+            src="/attached_assets/WhatsApp_Image_2026-01-22_at_2.13.29_PM_1769070721024.jpg" 
             alt="currency" 
-            className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-12px]"
-            style={{ filter: "contrast(1.2) brightness(0.2) sepia(1) hue-rotate(80deg) saturate(2)" }}
+            className="w-[62px] h-[82px] object-contain mt-3 mr-[-12px]"
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
           {amountDec !== "00" && (
