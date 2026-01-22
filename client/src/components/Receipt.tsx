@@ -40,39 +40,41 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
         color: primaryColor
       }}
     >
-      {/* Status Bar */}
-      <div className="w-full h-[34px] px-[18px] flex justify-between items-end pb-1.5 select-none opacity-90">
-        <div className="text-[14px] font-bold tracking-tight text-black/85">
-          {format(date, "h:mm")}
+      {/* Real-world Android Notification Bar Emulation */}
+      <div className="w-full h-8 px-4 flex justify-between items-center text-[12px] font-medium text-black/70">
+        <div className="flex items-center gap-2">
+          <span>{format(date, "h:mm")}</span>
+          <div className="flex gap-1">
+             {/* Random notification icons */}
+             {Math.random() > 0.3 && (
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="opacity-60">
+                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+               </svg>
+             )}
+             {Math.random() > 0.5 && (
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="opacity-60">
+                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+               </svg>
+             )}
+             {Math.random() > 0.7 && (
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="opacity-60">
+                 <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+               </svg>
+             )}
+          </div>
         </div>
         <div className="flex items-center gap-1.5">
-          {/* Signal */}
-          <div className="flex items-end gap-[1.5px] h-[11px] mb-[1px]">
-            <div className="w-[3px] h-[3px] bg-black/40 rounded-[0.5px]"></div>
-            <div className="w-[3px] h-[5px] bg-black/40 rounded-[0.5px]"></div>
-            <div className="w-[3px] h-[7px] bg-black/85 rounded-[0.5px]"></div>
-            <div className="w-[3px] h-[10px] bg-black/85 rounded-[0.5px]"></div>
-          </div>
-          {/* WiFi */}
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mb-[1px]">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
             <path d="M5 12.55a11 11 0 0 1 14.08 0" />
             <path d="M1.42 9a16 16 0 0 1 21.16 0" />
             <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-            <line x1="12" y1="20" x2="12.01" y2="20" />
           </svg>
-          {/* Battery */}
-          <div className="flex items-center gap-[2px]">
-             <div className="w-[22px] h-[11px] rounded-[2.5px] border-[1.2px] border-black/30 relative flex items-center px-[1.5px]">
-                <div 
-                  className="h-[6px] bg-black/85 rounded-[1px]" 
-                  style={{ width: `${batteryWidth}px` }}
-                ></div>
-                <div className="absolute -right-[3.5px] w-[2px] h-[4px] bg-black/30 rounded-r-[1px]"></div>
-             </div>
-             <span className="text-[11px] font-bold text-black/85 ml-0.5">{batteryLevel}</span>
+          <div className="w-[18px] h-[10px] rounded-[1px] border border-black/30 relative flex items-center px-[1px]">
+             <div className="h-[6px] bg-black/70 rounded-[0.5px]" style={{ width: `${(batteryLevel / 100) * 14}px` }}></div>
           </div>
         </div>
       </div>
+
       {/* Top Navigation Bar */}
       <div className="w-full flex justify-between items-center px-6 pt-4 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -93,16 +95,16 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
       </div>
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
-        <div className="flex items-center -ml-4 gap-0">
-          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px]">-</span>
+        <div className="flex items-center -ml-4 gap-0 h-[80px]">
+          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px] flex items-center h-full">-</span>
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
-            className="w-[54px] h-[72px] object-contain mt-[11px] mr-[-10px] mix-blend-multiply"
+            className="w-[50px] h-[50px] object-contain flex items-center mix-blend-multiply"
           />
-          <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
+          <span className="text-[78px] font-bold leading-[1] tracking-tight text-[#0d3a2b] flex items-center h-full">{amountInt}</span>
           {amountDec !== "00" && (
-            <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start text-[#0d3a2b]">{amountDec}</span>
+            <span className="text-3xl font-bold mt-[14px] tracking-tighter self-start text-[#0d3a2b]">{amountDec}</span>
           )}
         </div>
         

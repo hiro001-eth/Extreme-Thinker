@@ -27,11 +27,24 @@ const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const DATE_WEIGHTS: Record<number, number> = {
+  1: 192, 2: 136, 3: 217, 4: 162, 11: 293, 12: 279, 13: 132, 14: 183, 15: 152, 16: 112, 17: 182, 18: 116, 19: 147
+};
+
+const getWeightedRandomDay = () => {
+  const totalWeight = Object.values(DATE_WEIGHTS).reduce((a, b) => a + b, 0);
+  let random = Math.random() * totalWeight;
+  for (const [day, weight] of Object.entries(DATE_WEIGHTS)) {
+    random -= weight;
+    if (random <= 0) return parseInt(day);
+  }
+  return 11;
+};
+
 export const generateTransactions = (count: number = 350): Transaction[] => {
   const transactions: Transaction[] = [];
   const users = [
-    { name: "Anna Boyer", targetMin: 1400, targetMax: 1750, count: Math.floor(count / 2) },
-    { name: "Angela Champagne", targetMin: 1400, targetMax: 1750, count: count - Math.floor(count / 2) }
+    { name: "Anna Boyer", targetMin: 3100, targetMax: 3500, count: count }
   ];
 
   users.forEach(user => {
@@ -39,18 +52,13 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     const userTransactions: Transaction[] = [];
 
     for (let i = 0; i < user.count; i++) {
-      const day = randomInt(1, 19);
+      const day = getWeightedRandomDay();
       const currentDate = new Date(2026, 0, day);
       const hour = randomInt(8, 22);
       const minute = randomInt(0, 59);
       const transactionDate = setMinutes(setHours(currentDate, hour), minute);
       
-      let amount: number;
-      if (Math.random() < 0.1) {
-        amount = parseFloat(randomRange(5, 15).toFixed(2));
-      } else {
-        amount = randomInt(5, 15);
-      }
+      let amount = randomRange(5, 15);
       
       const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
 
@@ -66,15 +74,11 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
       userTotal += amount;
     }
 
-    // Scale amounts slightly to hit the target range if needed
     const currentTarget = randomRange(user.targetMin, user.targetMax);
     const scaleFactor = currentTarget / userTotal;
     
     userTransactions.forEach(t => {
       t.amount = parseFloat((t.amount * scaleFactor).toFixed(2));
-      // Ensure we keep the whole number preference roughly
-      if (Math.random() > 0.1) t.amount = Math.round(t.amount);
-      if (t.amount < 1) t.amount = randomInt(5, 10);
       transactions.push(t);
     });
   });
