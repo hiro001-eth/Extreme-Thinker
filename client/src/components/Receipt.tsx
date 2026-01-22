@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { format } from "date-fns";
 import dollarLogo from "@assets/WhatsApp_Image_2026-01-21_at_11.35.44_PM_1769017900602.jpeg";
-import { Battery, Wifi, BellOff, VolumeX, MapPin, MessageCircle, Instagram, Mail, Bell, ShieldCheck } from "lucide-react";
+import { Battery, Wifi, BellOff, VolumeX, MapPin, MessageCircle, Instagram, Mail, Bell, ShieldCheck, Facebook, Twitter, Phone, MessageSquare } from "lucide-react";
 
 import WhatsApp_Image_2026_01_22_at_2_13_29_PM from "@assets/WhatsApp Image 2026-01-22 at 2.13.29 PM.png";
 
@@ -34,19 +34,30 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
 
   // Randomize signal and health per instance
   const signalStrength = useMemo(() => Math.floor(Math.random() * 2) + 3, []); // 3 or 4 bars
-  const batteryHealth = useMemo(() => Math.floor(Math.random() * 15) + 85, []); // 85-100
+  const batteryHealth = useMemo(() => Math.floor(Math.random() * 20) + 80, []); // 80-100
   
-  // Randomize notification icons
+  // Randomize layout tweaks
+  const layoutRandoms = useMemo(() => ({
+    iconGap: Math.floor(Math.random() * 3) + 1, // 1-3px
+    navOpacity: (Math.random() * 0.2 + 0.7).toFixed(2), // 0.7-0.9
+    timeOffset: Math.floor(Math.random() * 4) - 2, // -2 to 2px shift
+  }), []);
+
+  // Randomize notification icons with better variety
   const notificationIcons = useMemo(() => {
     const icons = [
       <MessageCircle className="h-3 w-3 fill-current" />,
       <Instagram className="h-3 w-3" />,
-      <Mail className="h-3 w-3" />,
+      <Mail className="h-[13px] w-[13px]" />,
       <Bell className="h-3 w-3" />,
-      <ShieldCheck className="h-3 w-3" />
+      <ShieldCheck className="h-3 w-3" />,
+      <Facebook className="h-3 w-3 fill-current" />,
+      <Twitter className="h-3 w-3 fill-current" />,
+      <Phone className="h-3 w-3 fill-current" />,
+      <MessageSquare className="h-3 w-3" />
     ];
-    // Pick 1-3 random icons
-    return icons.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 1);
+    // Pick 0-4 random icons
+    return icons.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 5));
   }, []);
 
   const renderNav = () => {
@@ -54,18 +65,21 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
     const textColor = isAngela ? "text-white/90" : "text-black/85";
 
     return (
-      <div className={`w-full h-7 px-4 pt-1 flex justify-between items-center text-[11.5px] font-semibold tracking-tight ${textColor}`} style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-        <div className="flex items-center gap-1.5">
-          <span>{time}</span>
-          <div className="flex items-center gap-1 opacity-70">
+      <div className={`w-full h-7 px-4 pt-1 flex justify-between items-center text-[11.5px] font-semibold tracking-tight ${textColor}`} style={{ 
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+        opacity: layoutRandoms.navOpacity
+      }}>
+        <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap + 3}px` }}>
+          <span style={{ marginLeft: `${layoutRandoms.timeOffset}px` }}>{time}</span>
+          <div className="flex items-center opacity-70" style={{ gap: `${layoutRandoms.iconGap}px` }}>
             {notificationIcons.map((icon, i) => (
               <React.Fragment key={i}>{icon}</React.Fragment>
             ))}
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center gap-0.5">
+        <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap + 4}px` }}>
+          <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap}px` }}>
             <MapPin className="h-[10px] w-[10px] opacity-70" />
             <Wifi className="h-3 w-3 opacity-90" />
             <div className="flex items-end gap-[1px] h-[8px] opacity-90">
@@ -74,7 +88,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center" style={{ gap: `${layoutRandoms.iconGap}px` }}>
              <div className="px-1 py-0 bg-black/10 rounded-full text-[9px] font-black scale-90">{batteryHealth}</div>
              <div className="relative w-5 h-[10px] border border-current/30 rounded-[2px] flex items-center px-[1px]">
                <div className="h-[6px] bg-current/80 rounded-[0.5px]" style={{ width: `${(batteryLevel / 100) * 16}px` }} />
