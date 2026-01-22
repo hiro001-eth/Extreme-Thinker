@@ -93,11 +93,11 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4">
-          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px]">-</span>
+          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-12px]">-</span>
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-8px]"
+            className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-12px]"
             style={{ filter: "contrast(1.2) brightness(1.1) sepia(0.3) hue-rotate(100deg)" }}
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
