@@ -146,9 +146,9 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
         <div className="flex items-center mt-1">
           <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight">Payment to</p>
           <img 
-            src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_dollar_sign} 
+            src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="dollar" 
-            className={`w-[10px] h-[10px] object-contain mx-1 ${isAngela ? 'brightness-0 invert' : 'mix-blend-multiply'}`}
+            className={`w-[12px] h-[12px] object-contain mx-1 ${isAngela ? 'brightness-0 invert' : 'mix-blend-multiply'}`}
           />
           <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight">{userHandle}</p>
         </div>
