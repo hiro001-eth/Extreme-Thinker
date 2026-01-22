@@ -28,7 +28,7 @@ const randomInt = (min: number, max: number) => {
 };
 
 const DATE_WEIGHTS_POOL: Record<number, number> = {
-  1: 192, 2: 136, 3: 217, 4: 162, 11: 293, 12: 279, 13: 132, 14: 183, 15: 152, 16: 112, 17: 182, 18: 116, 19: 147
+  1: 1, 2: 1, 3: 1, 4: 1, 11: 1, 12: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1, 19: 1
 };
 
 const getWeightedRandomDay = () => {
