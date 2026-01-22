@@ -18,7 +18,7 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
-  const primaryColor = "#012a1c"; 
+  const primaryColor = "#0d3a2b"; 
   const secondaryColor = "#6a6a6a"; // Matched color for remarks/date from screenshots
 
   // Calculate battery width based on level (max 14px)
@@ -85,7 +85,7 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
         <div className="w-20 h-20 rounded-full bg-[#f3f5f7] flex items-center justify-center text-2xl font-medium text-gray-700 mb-4">
           {userName.charAt(0)}
         </div>
-        <h2 className="text-[21px] font-bold tracking-tight">{userName}</h2>
+        <h2 className="text-[21px] font-bold tracking-tight text-[#0d3a2b]">{userName}</h2>
         <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to ${userName.replace(' ', '-')}-2</p>
         <p className="text-gray-500 text-[13px] font-medium tracking-tight">from Checking Account</p>
       </div>
@@ -93,16 +93,16 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4">
-          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
+          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px]">-</span>
           <img 
             src={dollarLogo} 
             alt="currency" 
             className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-8px]"
-            style={{ filter: "contrast(1.2) brightness(1.1)" }}
+            style={{ filter: "contrast(1.2) brightness(1.1) sepia(0.3) hue-rotate(100deg)" }}
           />
-          <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
+          <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
           {amountDec !== "00" && (
-            <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start text-[#012a1c]">{amountDec}</span>
+            <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start text-[#0d3a2b]">{amountDec}</span>
           )}
         </div>
         
@@ -117,12 +117,12 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
 
       {/* Status Footer */}
       <div className="w-full flex items-center justify-center gap-2.5 pb-[64px]">
-        <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#012a1c] flex items-center justify-center">
-             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+        <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#0d3a2b] flex items-center justify-center">
+             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d3a2b" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
              </svg>
         </div>
-        <span className="text-[19px] font-medium tracking-tight text-[#012a1c]">Complete</span>
+        <span className="text-[19px] font-medium tracking-tight text-[#0d3a2b]">Complete</span>
       </div>
 
       {/* Real Samsung Navigation Bar - VARIES BY STYLE */}
