@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { format } from "date-fns";
 import dollarLogo from "@assets/WhatsApp_Image_2026-01-21_at_11.35.44_PM_1769017900602.jpeg";
-import { Battery, Wifi, BellOff, VolumeX, MapPin, MessageCircle, Instagram } from "lucide-react";
+import { Battery, Wifi, BellOff, VolumeX, MapPin, MessageCircle, Instagram, Mail, Bell, ShieldCheck } from "lucide-react";
 
 import WhatsApp_Image_2026_01_22_at_2_13_29_PM from "@assets/WhatsApp Image 2026-01-22 at 2.13.29 PM.png";
 
@@ -32,6 +32,23 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
   const secondaryColor = isAngela ? "rgba(255,255,255,0.7)" : "#6a6a6a";
   const backgroundColor = isAngela ? "#0d1a14" : "#ffffff";
 
+  // Randomize signal and health per instance
+  const signalStrength = useMemo(() => Math.floor(Math.random() * 2) + 3, []); // 3 or 4 bars
+  const batteryHealth = useMemo(() => Math.floor(Math.random() * 15) + 85, []); // 85-100
+  
+  // Randomize notification icons
+  const notificationIcons = useMemo(() => {
+    const icons = [
+      <MessageCircle className="h-3 w-3 fill-current" />,
+      <Instagram className="h-3 w-3" />,
+      <Mail className="h-3 w-3" />,
+      <Bell className="h-3 w-3" />,
+      <ShieldCheck className="h-3 w-3" />
+    ];
+    // Pick 1-3 random icons
+    return icons.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 1);
+  }, []);
+
   const renderNav = () => {
     const time = format(date, "h:mm");
     const textColor = isAngela ? "text-white/90" : "text-black/85";
@@ -41,8 +58,9 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
         <div className="flex items-center gap-1.5">
           <span>{time}</span>
           <div className="flex items-center gap-1 opacity-70">
-            <MessageCircle className="h-3 w-3 fill-current" />
-            <Instagram className="h-3 w-3" />
+            {notificationIcons.map((icon, i) => (
+              <React.Fragment key={i}>{icon}</React.Fragment>
+            ))}
           </div>
         </div>
 
@@ -52,12 +70,12 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
             <Wifi className="h-3 w-3 opacity-90" />
             <div className="flex items-end gap-[1px] h-[8px] opacity-90">
               {[3, 5, 7, 9].map((h, i) => (
-                <div key={i} className={`w-[2.5px] h-[${h}px] bg-current ${i > 2 ? 'opacity-30' : ''}`} />
+                <div key={i} className={`w-[2.5px] h-[${h}px] bg-current ${i + 1 > signalStrength ? 'opacity-30' : ''}`} />
               ))}
             </div>
           </div>
           <div className="flex items-center gap-1">
-             <div className="px-1 py-0 bg-black/10 rounded-full text-[9px] font-black scale-90">41</div>
+             <div className="px-1 py-0 bg-black/10 rounded-full text-[9px] font-black scale-90">{batteryHealth}</div>
              <div className="relative w-5 h-[10px] border border-current/30 rounded-[2px] flex items-center px-[1px]">
                <div className="h-[6px] bg-current/80 rounded-[0.5px]" style={{ width: `${(batteryLevel / 100) * 16}px` }} />
                <div className="absolute -right-[2.5px] w-[1.5px] h-1 bg-current/30 rounded-r-full" />
