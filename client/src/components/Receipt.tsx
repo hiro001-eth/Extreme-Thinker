@@ -123,9 +123,9 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
-            className="w-[34px] h-[34px] object-contain flex items-center mix-blend-multiply mt-[4px]"
+            className="w-[44px] h-[44px] object-contain flex items-center mix-blend-multiply mt-[8px]"
           />
-          <span className="text-[72px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-2px]">{amountInt}</span>
+          <span className="text-[72px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-4px]">{amountInt}</span>
         </div>
         
         <div className="mt-[-6px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
