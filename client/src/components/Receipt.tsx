@@ -123,13 +123,13 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4 gap-0 h-[80px]">
-          <span className="text-[58px] font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full">-</span>
+          <span className="text-[54px] font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full">-</span>
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
-            className="w-[52px] h-[52px] object-contain flex items-center mix-blend-multiply mt-[10px]"
+            className="w-[48px] h-[48px] object-contain flex items-center mix-blend-multiply mt-[8px]"
           />
-          <span className="text-[72px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-6px]">{amountInt}</span>
+          <span className="text-[64px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-6px]">{amountInt}</span>
           {amountDec && amountDec !== "00" && (
             <span className="text-3xl font-bold mt-[14px] tracking-tighter self-start text-[#0d3a2b]">{amountDec}</span>
           )}
