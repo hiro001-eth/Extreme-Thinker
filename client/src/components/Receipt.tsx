@@ -137,7 +137,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
             alt="currency" 
             className="w-[48px] h-[48px] object-contain flex items-center mix-blend-multiply mt-[0px] mb-[0px] mr-[-10px] drop-shadow-[0.5px_0_0_#0d3a2b] brightness-90"
           />
-          <span className="font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[0px] mr-[0px] mt-[0px] mb-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px] text-justify text-[67px]">{amountInt}</span>
+          <span className="font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[0px] mr-[0px] mt-[0px] mb-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px] text-justify text-[55px]">{amountInt}</span>
           {amountDec && amountDec !== "00" && (
             <span className="text-3xl font-bold mt-[14px] tracking-tighter self-start text-[#0d3a2b]">{amountDec}</span>
           )}
