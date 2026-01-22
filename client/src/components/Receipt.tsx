@@ -30,7 +30,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
   const isAngela = userName.toLowerCase().includes("angela");
   const primaryColor = isAngela ? "#ffffff" : "#0d3a2b";
   const secondaryColor = isAngela ? "rgba(255,255,255,0.7)" : "#6a6a6a";
-  const backgroundColor = isAngela ? "#0d1a14" : "#ffffff";
+  const backgroundColor = isAngela ? "#071d15" : "#ffffff";
 
   // Deep Randomization (Figma UI/UX Standard)
   const stats = useMemo(() => {
@@ -136,7 +136,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
       </div>
       {/* Profile Section */}
       <div className="mt-2 flex flex-col items-center">
-        <div className={`w-20 h-20 rounded-full ${isAngela ? 'bg-white/10' : 'bg-[#f3f5f7]'} flex items-center justify-center text-2xl font-medium ${isAngela ? 'text-white' : 'text-gray-700'} mb-4`}>
+        <div className={`w-[70px] h-[70px] rounded-full ${isAngela ? 'bg-[#0f2d22]' : 'bg-[#f3f5f7]'} flex items-center justify-center text-xl font-medium ${isAngela ? 'text-white' : 'text-gray-700'} mb-4`}>
           {userName.charAt(0)}
         </div>
         <h2 className="text-[21px] font-bold tracking-tight">{userName}</h2>
