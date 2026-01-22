@@ -186,6 +186,7 @@ export default function Generator() {
                  amount={currentBatch[currentProcessingIndex].amount}
                  date={currentBatch[currentProcessingIndex].date}
                  remarks={currentBatch[currentProcessingIndex].remarks}
+                 batteryLevel={currentBatch[currentProcessingIndex].batteryLevel}
                />
              </div>
           )}

@@ -7,15 +7,19 @@ interface ReceiptProps {
   date: Date;
   remarks: string;
   id?: string;
+  batteryLevel?: number;
 }
 
-export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
+export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: ReceiptProps) => {
   const amountInt = Math.floor(amount);
   const amountDec = (amount % 1).toFixed(2).split(".")[1];
   const dateStr = format(date, "MMM d");
   const timeStr = format(date, "h:mm a");
 
   const primaryColor = "#012a1c"; 
+
+  // Calculate battery width based on level (max 14px)
+  const batteryWidth = Math.max(2, (batteryLevel / 100) * 14);
 
   return (
     <div 
@@ -51,10 +55,13 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
           {/* Battery */}
           <div className="flex items-center gap-[2px]">
              <div className="w-[22px] h-[11px] rounded-[2.5px] border-[1.2px] border-black/30 relative flex items-center px-[1.5px]">
-                <div className="h-[6px] w-[14px] bg-black/85 rounded-[1px]"></div>
+                <div 
+                  className="h-[6px] bg-black/85 rounded-[1px]" 
+                  style={{ width: `${batteryWidth}px` }}
+                ></div>
                 <div className="absolute -right-[3.5px] w-[2px] h-[4px] bg-black/30 rounded-r-[1px]"></div>
              </div>
-             <span className="text-[11px] font-bold text-black/85 ml-0.5">95</span>
+             <span className="text-[11px] font-bold text-black/85 ml-0.5">{batteryLevel}</span>
           </div>
         </div>
       </div>
@@ -89,7 +96,7 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
             className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-4px]"
             style={{ filter: "contrast(1.2) brightness(1.1)" }}
           />
-          <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
+          <span className="text-[76px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
           {amountDec !== "00" && (
             <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start text-[#012a1c]">{amountDec}</span>
           )}

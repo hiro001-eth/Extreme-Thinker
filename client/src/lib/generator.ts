@@ -5,6 +5,7 @@ export interface Transaction {
   amount: number;
   date: Date;
   remarks: string;
+  batteryLevel: number;
 }
 
 const REMARKS = [
@@ -60,6 +61,7 @@ export const generateTransactions = (count: number = 300): Transaction[] => {
       amount: amount,
       date: transactionDate,
       remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
+      batteryLevel: randomInt(1, 100),
     });
     
     grandTotal += amount;
