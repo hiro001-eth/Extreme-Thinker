@@ -8,12 +8,17 @@ export interface Transaction {
 }
 
 const REMARKS = [
-  "pizza", "lunch", "book", "bill", "coffee", "burger", "snacks", "market", 
-  "groceries", "uber", "taxi", "movie", "gift", "clothes", "dinner", 
+  // Primary categories (weighted more heavily)
+  "food", "shopping", "uber", "travel", "bill",
+  "food", "shopping", "uber", "travel", "bill",
+  "food", "shopping", "uber", "travel", "bill",
+  "food", "shopping", "uber", "travel", "bill",
+  "food", "shopping", "uber", "travel", "bill",
+  // Secondary categories
+  "pizza", "lunch", "book", "coffee", "burger", "snacks", "market", 
+  "groceries", "taxi", "movie", "gift", "clothes", "dinner", 
   "breakfast", "pharmacy", "rent", "wifi", "gaming", "target", "thrift", 
-  "shoes", "fitness", "gas", "subway", "coffee run", "pizza night", 
-  "lunch date", "book haul", "rent due", "wifi bill", "gym fee", 
-  "gas station", "gift shop", "movie ticket"
+  "shoes", "fitness", "gas", "subway"
 ];
 
 // Helper to get random number between min and max (inclusive)
@@ -42,12 +47,17 @@ export const generateTransactions = (count: number = 300): Transaction[] => {
     const transactionDate = setMinutes(setHours(currentDate, hour), minute);
     
     // Transaction amount 5 - 15 (Average $10)
-    // For 300 transactions, total will be roughly $3000
-    const amount = randomRange(5, 15);
+    // 1 in 10 should have decimals, others whole numbers
+    let amount: number;
+    if (Math.random() < 0.1) {
+      amount = parseFloat(randomRange(5, 15).toFixed(2));
+    } else {
+      amount = randomInt(5, 15);
+    }
     
     transactions.push({
       id: Math.random().toString(36).substr(2, 9),
-      amount: parseFloat(amount.toFixed(2)),
+      amount: amount,
       date: transactionDate,
       remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
     });

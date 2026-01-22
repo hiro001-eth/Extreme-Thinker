@@ -51,14 +51,14 @@ export const Receipt = ({ amount, date, remarks, id }: ReceiptProps) => {
       {/* Main Transaction Info */}
       <div className="mt-32 flex flex-col items-center">
         <div className="flex items-center -ml-4">
-          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-0.5">-</span>
+          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
           <img 
             src={dollarLogo} 
             alt="currency" 
-            className="w-[54px] h-[72px] object-contain mt-3.5 mix-blend-multiply"
+            className="w-[54px] h-[72px] object-contain mt-3.5 mix-blend-multiply mr-[-4px]"
             style={{ filter: "contrast(1.2) brightness(1.1)" }}
           />
-          <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c] ml-0.5">{amountInt}</span>
+          <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
           {amountDec !== "00" && (
             <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start text-[#012a1c]">{amountDec}</span>
           )}
