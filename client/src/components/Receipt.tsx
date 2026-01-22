@@ -97,7 +97,7 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           <img 
             src="/attached_assets/WhatsApp_Image_2026-01-22_at_2.13.29_PM_1769070916756.jpg" 
             alt="currency" 
-            className="w-[48px] h-[64px] object-contain mt-2.5 mr-[-4px]"
+            className="w-[60px] h-[80px] object-contain mt-2 mr-[-6px]"
           />
           <span className="text-[78px] font-bold leading-none tracking-tight text-[#0d3a2b]">{amountInt}</span>
           {amountDec !== "00" && (
