@@ -158,7 +158,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
-            className={`w-[48px] h-[48px] object-contain flex items-center mt-[0px] mb-[0px] mr-[-10px] drop-shadow-[0.5px_0_0_currentcolor] brightness-90 ${isAngela ? 'brightness-0 invert' : 'mix-blend-multiply'}`}
+            className={`w-[48px] h-[48px] object-contain flex items-center mt-[0px] mb-[0px] mr-[-10px] drop-shadow-[0.5px_0_0_currentcolor] ${isAngela ? 'brightness-0 invert contrast-[2]' : 'brightness-90 mix-blend-multiply'}`}
           />
           <span className="font-bold tracking-tighter flex items-center h-full ml-[0px] mr-[0px] mt-[0px] mb-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px] text-justify text-[57px]">{amountInt}</span>
           {amountDec && amountDec !== "00" && (
