@@ -145,7 +145,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="dollar" 
-            className="w-[12px] h-[12px] object-contain mix-blend-multiply ml-[-2px] mr-[-2px]"
+            className="w-[12px] h-[12px] object-contain mix-blend-multiply ml-[0px] mr-[0px]"
           />
           <p style={{ color: secondaryColor }} className="text-[13px] font-medium tracking-tight whitespace-nowrap">{userHandle}</p>
         </div>
