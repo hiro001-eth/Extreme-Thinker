@@ -101,7 +101,6 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           </div>
         </div>
       </div>
-
       {/* Top Navigation Bar */}
       <div className="w-full flex justify-between items-center px-6 pt-4 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -129,7 +128,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
             alt="currency" 
             className="w-[48px] h-[48px] object-contain flex items-center mix-blend-multiply mt-[8px]"
           />
-          <span className="text-[64px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-6px]">{amountInt}</span>
+          <span className="font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[0px] mr-[0px] mt-[0px] mb-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px] text-[55px] text-justify">{amountInt}</span>
           {amountDec && amountDec !== "00" && (
             <span className="text-3xl font-bold mt-[14px] tracking-tighter self-start text-[#0d3a2b]">{amountDec}</span>
           )}
