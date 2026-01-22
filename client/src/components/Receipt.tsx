@@ -193,7 +193,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
         {navStyle !== 'none' && (
           <div className="w-full flex justify-center items-center pb-2 px-10">
             {navStyle === 'buttons' ? (
-              <div className={`w-full max-w-[320px] h-[44px] flex justify-between items-center px-12 rounded-[14px] bg-[#f0f0f0] opacity-90 ${isAngela ? 'invert' : ''}`}>
+              <div className={`w-full max-w-[320px] h-[44px] flex justify-between items-center px-12 ${isAngela ? 'invert' : ''}`}>
                 <div className="flex gap-[3.5px] items-center">
                   <div className="w-[1.5px] h-3.5 bg-[#666] rounded-full"></div>
                   <div className="w-[1.5px] h-3.5 bg-[#666] rounded-full"></div>
@@ -207,7 +207,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
             ) : navStyle === 'swipe' ? (
               <div className={`w-28 h-[4px] ${isAngela ? 'bg-white/15' : 'bg-black/15'} rounded-full`}></div>
             ) : (
-              <div className={`w-full max-w-[320px] h-[44px] flex justify-between items-center px-12 rounded-[14px] bg-[#f0f0f0] opacity-90 ${isAngela ? 'invert' : ''}`}>
+              <div className={`w-full max-w-[320px] h-[44px] flex justify-between items-center px-12 ${isAngela ? 'invert' : ''}`}>
                 <div className="w-4 h-4 rounded-full border-[2px] border-[#666]"></div>
                 <div className="w-4 h-4 rounded-[4px] border-[2px] border-[#666]"></div>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
