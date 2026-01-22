@@ -27,7 +27,7 @@ const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const FIXED_DATES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+const FIXED_DATES = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 export const generateTransactions = (count: number = 350): Transaction[] => {
   const transactions: Transaction[] = [];
@@ -41,36 +41,30 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     let userTotal = 0;
     const userTransactions: Transaction[] = [];
     
-    // Distribute transactions evenly across the fixed dates
-    const txPerDay = Math.floor(user.count / FIXED_DATES.length);
-    const remainder = user.count % FIXED_DATES.length;
-
-    FIXED_DATES.forEach((day, index) => {
-      const dailyCount = txPerDay + (index < remainder ? 1 : 0);
+    for (let i = 0; i < user.count; i++) {
+      // Pick a random day from our allowed January dates
+      const day = FIXED_DATES[randomInt(0, FIXED_DATES.length - 1)];
+      const currentDate = new Date(2026, 0, day);
+      const hour = randomInt(8, 22);
+      const minute = randomInt(0, 59);
+      const transactionDate = setMinutes(setHours(currentDate, hour), minute);
       
-      for (let i = 0; i < dailyCount; i++) {
-        const currentDate = new Date(2026, 0, day);
-        const hour = randomInt(8, 22);
-        const minute = randomInt(0, 59);
-        const transactionDate = setMinutes(setHours(currentDate, hour), minute);
-        
-        let amount = randomRange(5, 15);
-        const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
+      let amount = randomRange(5, 15);
+      const navStyles: ('buttons' | 'swipe' | 'none')[] = ['buttons', 'swipe', 'none'];
 
-        userTransactions.push({
-          id: Math.random().toString(36).substr(2, 9),
-          amount: amount,
-          date: transactionDate,
-          remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
-          batteryLevel: randomInt(1, 100),
-          userName: user.name,
-          userHandle: user.handle,
-          navStyle: navStyles[randomInt(0, 2)],
-          useCents: transactions.length + userTransactions.length > 20 && Math.random() < 0.05,
-        });
-        userTotal += amount;
-      }
-    });
+      userTransactions.push({
+        id: Math.random().toString(36).substr(2, 9),
+        amount: amount,
+        date: transactionDate,
+        remarks: REMARKS[randomInt(0, REMARKS.length - 1)],
+        batteryLevel: randomInt(1, 100),
+        userName: user.name,
+        userHandle: user.handle,
+        navStyle: navStyles[randomInt(0, 2)],
+        useCents: transactions.length + userTransactions.length > 20 && Math.random() < 0.05,
+      });
+      userTotal += amount;
+    }
 
     const currentTarget = randomRange(user.targetMin, user.targetMax);
     const scaleFactor = currentTarget / userTotal;
