@@ -27,7 +27,7 @@ const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const FIXED_DATES = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+const FIXED_DATES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 export const generateTransactions = (count: number = 350): Transaction[] => {
   const transactions: Transaction[] = [];
