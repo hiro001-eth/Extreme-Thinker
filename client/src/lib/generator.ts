@@ -75,5 +75,6 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
     });
   });
 
-  return transactions.sort((a, b) => a.date.getTime() - b.date.getTime());
+  // Return in random order as requested instead of sorted by date
+  return transactions;
 };
