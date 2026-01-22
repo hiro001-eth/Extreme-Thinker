@@ -136,7 +136,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
       </div>
       {/* Profile Section */}
       <div className="mt-2 flex flex-col items-center">
-        <div className={`w-[70px] h-[70px] rounded-full ${isAngela ? 'bg-[#0f2d22]' : 'bg-[#f3f5f7]'} flex items-center justify-center text-xl font-medium ${isAngela ? 'text-white' : 'text-gray-700'} mb-4`}>
+        <div className="w-[70px] h-[70px] rounded-full flex items-center justify-center text-xl font-medium text-white mb-4 bg-[#074a19]">
           {userName.charAt(0)}
         </div>
         <h2 className="text-[21px] font-bold tracking-tight">{userName}</h2>
