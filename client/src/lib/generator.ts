@@ -49,7 +49,7 @@ export const generateTransactions = (count: number = 350): Transaction[] => {
   
   const users = [
     { name: "Anna Boyer", handle: "Anna-Boyer-2", targetMin: 1400, targetMax: 1750, count: Math.floor(count / 2) },
-    { name: "Angela Champagne", handle: "Angela-Champagne-1", targetMin: 1400, targetMax: 1750, count: count - Math.floor(count / 2) }
+    { name: "Angela Champagne", handle: "Angela-Champagne-4", targetMin: 1400, targetMax: 1750, count: count - Math.floor(count / 2) }
   ];
 
   users.forEach(user => {
