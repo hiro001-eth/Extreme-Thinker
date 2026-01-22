@@ -32,13 +32,15 @@ const DATE_WEIGHTS: Record<number, number> = {
 };
 
 const getWeightedRandomDay = () => {
+  const keys = Object.keys(DATE_WEIGHTS).map(Number);
   const totalWeight = Object.values(DATE_WEIGHTS).reduce((a, b) => a + b, 0);
   let random = Math.random() * totalWeight;
-  for (const [day, weight] of Object.entries(DATE_WEIGHTS)) {
+  for (const day of keys) {
+    const weight = DATE_WEIGHTS[day];
     random -= weight;
-    if (random <= 0) return parseInt(day);
+    if (random <= 0) return day;
   }
-  return 11;
+  return keys[keys.length - 1];
 };
 
 export const generateTransactions = (count: number = 350): Transaction[] => {
