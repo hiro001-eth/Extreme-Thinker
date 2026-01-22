@@ -1,0 +1,200 @@
+Create a realistic notification screenshot generator that produces 350 unique images with authentic-looking transaction notifications, adhering to specific date distributions and visual requirements.
+
+1. DATE & TIME DISTRIBUTION REQUIREMENTS
+Date Distribution (Total: 350 images)
+Generate random timestamps across these specific dates with exact counts:
+DateRequired CountNotesJanuary 1192 imagesHighest volume dayJanuary 2136 imagesJanuary 3217 imagesJanuary 4162 imagesJanuary 11293 imagesPeak volume dayJanuary 12279 imagesSecond highestJanuary 13132 imagesJanuary 14183 imagesJanuary 15152 imagesJanuary 16112 imagesLowest volumeJanuary 17182 imagesJanuary 18116 imagesJanuary 19147 images
+Implementation Algorithm
+FUNCTION generateDateTimestamp():
+    1. Create weighted array with exact date counts
+    2. Shuffle array randomly (Fisher-Yates algorithm)
+    3. For each generation, pop next date from shuffled array
+    4. Generate random time (HH:MM format, 24-hour)
+       - Hours: 00-23 (randomized)
+       - Minutes: 00-59 (randomized)
+    5. Ensure no duplicate timestamps (date + time combo)
+    6. Format: "January [day], [time]" or "[Mon DD], [HH:MM]"
+
+2. TRANSACTION AMOUNT REQUIREMENTS
+Amount Range & Distribution
+
+Total Pool: $3,100 - $3,500 USD
+Per Transaction: Randomize amounts realistically
+Suggested Range: $5 - $25 per transaction (varies)
+Distribution: Use normal distribution centered around $9-10
+
+Implementation
+FUNCTION generateAmount():
+    1. Use Gaussian/Normal distribution
+    2. Mean: $9.50
+    3. Standard deviation: $3.50
+    4. Min cap: $3.00
+    5. Max cap: $30.00
+    6. Format: "$X.XX" (always 2 decimal places)
+    7. Ensure total across 350 images = $3,100-$3,500
+
+3. TOP NOTIFICATION BAR VARIATIONS
+Critical Requirement
+Every generated image MUST have a DIFFERENT notification bar to prevent detection of fake/repeated images.
+Elements to Randomize
+A. Status Icons (Left Side)
+Rotate through realistic combinations:
+
+Signal strength: 1-4 bars
+WiFi: On/Off, different strengths
+Cellular network: 4G, 5G, LTE
+Airplane mode: Occasionally show
+Bluetooth: On/Off randomly
+
+B. Time Display (Center)
+
+Use the same timestamp as the notification content
+Format: 12-hour (3:45 PM) or 24-hour (15:45)
+Vary AM/PM appropriately
+
+C. Battery & System Icons (Right Side)
+
+Battery percentage: 15%-100% (randomized)
+Battery icon states: Charging/Not charging
+Battery colors: Green (>50%), Yellow (20-50%), Red (<20%)
+Alarm icon: Show/Hide randomly
+Location icon: Show/Hide randomly
+Rotation lock: Occasionally visible
+
+Visual Specifications
+
+Use authentic Android/iOS system icons
+Match the device style consistently per image
+Ensure icons are crisp, properly aligned, and sized
+Status bar background: Match device theme (light/dark mode variations)
+
+
+4. USD LOGO & AMOUNT VISUAL ALIGNMENT
+Critical Visual Requirements
+A. Logo-Amount Height Matching
+REQUIREMENT: USD logo height = Amount text height (EXACT)
+
+Implementation:
+1. Measure amount text height in pixels
+2. Scale USD logo to MATCH this exact height
+3. Use proportional scaling (maintain aspect ratio)
+4. Baseline alignment: Both should sit on same baseline
+B. Spacing & Layout
+
+Gap between logo and amount: 8-12px consistent
+Vertical alignment: Center-aligned or baseline-aligned
+Font weight: Medium to Bold for amount
+Logo style: Professional, clean USD symbol or dollar icon
+
+C. Reference Sample Image Analysis
+ACTION REQUIRED:
+
+Analyze the provided sample image dimensions
+Extract exact:
+
+Font size of amount
+Logo dimensions
+Spacing ratios
+Color values
+Padding measurements
+
+
+Replicate these measurements EXACTLY
+
+
+5. OVERALL REALISM REQUIREMENTS
+Visual Authenticity Checklist
+
+✅ Use actual notification design patterns (Material Design/iOS)
+✅ Realistic app icons (payment apps like PayPal, Venmo, Cash App, etc.)
+✅ Authentic notification text templates
+✅ Proper typography (system fonts: Roboto, SF Pro)
+✅ Accurate shadows, borders, rounded corners
+✅ Appropriate notification timestamps
+✅ Realistic sender names/app names
+✅ Proper notification priority indicators
+
+Text Variations for Notifications
+Rotate through realistic messages:
+
+"You received $X.XX"
+"Payment of $X.XX received"
+"$X.XX deposited to your account"
+"New payment: $X.XX"
+"You've got $X.XX"
+"[Name] sent you $X.XX"
+
+
+6. TECHNICAL IMPLEMENTATION CHECKLIST
+Pre-Generation Setup
+
+ Create date distribution array (350 entries)
+ Shuffle date array for randomization
+ Initialize amount pool ($3,100-$3,500)
+ Load notification bar icon assets
+ Load USD logo assets
+ Set up base notification template
+
+Per-Image Generation Loop
+FOR i = 1 to 350:
+    1. Get next date from shuffled array
+    2. Generate random time
+    3. Generate random amount (track running total)
+    4. Generate unique notification bar configuration
+    5. Select random notification text template
+    6. Scale USD logo to match amount text height
+    7. Compose final image
+    8. Validate visual accuracy
+    9. Save with unique filename (e.g., "notification_001.png")
+    10. Log metadata (date, time, amount)
+END FOR
+Post-Generation Validation
+
+ Verify total image count = 350
+ Verify date distribution matches requirements
+ Verify total amount = $3,100-$3,500
+ Check for duplicate notification bars (should be 0)
+ Spot-check 20 random images for visual quality
+
+
+7. OUTPUT SPECIFICATIONS
+File Naming
+Format: notification_[sequential_number]_[date]_[time].png
+Example: notification_001_jan01_1423.png
+Image Specifications
+
+Format: PNG (for quality)
+Resolution: 1080x2340px (or match reference sample)
+Color space: sRGB
+Quality: High (no compression artifacts)
+
+Metadata Log (CSV)
+Generate accompanying CSV file:
+image_filename, date, time, amount, notification_text, battery_level
+notification_001.png, January 1, 14:23, $9.45, "You received $9.45", 87%
+
+8. TESTING & QUALITY ASSURANCE
+Visual Test Checklist (Sample 10 Images)
+
+✅ Logo and amount are same height?
+✅ Notification bar is unique?
+✅ Timestamp looks authentic?
+✅ Overall composition matches sample?
+✅ No visual glitches or artifacts?
+
+Distribution Test
+
+✅ Run date count validation
+✅ Verify amount total
+✅ Check randomization (no obvious patterns)
+
+
+FINAL NOTES FOR REPLIT
+Key Success Criteria:
+
+Generate EXACTLY 350 images
+Match date distribution EXACTLY as specified
+Total transaction value: $3,100-$3,500
+EVERY notification bar must be unique
+USD logo height = Amount text height (EXACTLY)
+Images must be indistinguishable from real notifications

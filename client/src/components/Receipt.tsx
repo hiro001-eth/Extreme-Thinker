@@ -119,16 +119,13 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4 gap-0 h-[80px]">
-          <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px] flex items-center h-full">-</span>
+          <span className="text-[58px] font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full">-</span>
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
-            className="w-[50px] h-[50px] object-contain flex items-center mix-blend-multiply"
+            className="w-[34px] h-[34px] object-contain flex items-center mix-blend-multiply mt-[4px]"
           />
-          <span className="text-[78px] font-bold leading-[1] tracking-tight text-[#0d3a2b] flex items-center h-full">{amountInt}</span>
-          {amountDec !== "00" && (
-            <span className="text-3xl font-bold mt-[14px] tracking-tighter self-start text-[#0d3a2b]">{amountDec}</span>
-          )}
+          <span className="text-[72px] font-bold leading-[1] tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[-2px]">{amountInt}</span>
         </div>
         
         <div className="mt-[-6px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
