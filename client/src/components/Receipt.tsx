@@ -2,6 +2,8 @@ import React from "react";
 import { format } from "date-fns";
 import dollarLogo from "@assets/WhatsApp_Image_2026-01-21_at_11.35.44_PM_1769017900602.jpeg";
 
+import WhatsApp_Image_2026_01_22_at_2_13_29_PM from "@assets/WhatsApp Image 2026-01-22 at 2.13.29 PM.png";
+
 interface ReceiptProps {
   amount: number;
   date: Date;
@@ -69,7 +71,6 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           </div>
         </div>
       </div>
-
       {/* Top Navigation Bar */}
       <div className="w-full flex justify-between items-center px-6 pt-4 pb-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -79,7 +80,6 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           <circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/><circle cx="5" cy="12" r="1.2"/>
         </svg>
       </div>
-
       {/* Profile Section */}
       <div className="mt-2 flex flex-col items-center">
         <div className="w-20 h-20 rounded-full bg-[#f3f5f7] flex items-center justify-center text-2xl font-medium text-gray-700 mb-4">
@@ -89,13 +89,12 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
         <p className="text-gray-500 text-[13px] mt-1 font-medium tracking-tight">Payment to ${userName.replace(' ', '-')}-2</p>
         <p className="text-gray-500 text-[13px] font-medium tracking-tight">from Checking Account</p>
       </div>
-
       {/* Main Transaction Info - EXACT CENTER */}
       <div className="flex-1 flex flex-col items-center justify-center -mt-20">
         <div className="flex items-center -ml-4 gap-0">
           <span className="text-[64px] font-bold tracking-tighter text-[#0d3a2b] mr-[-8px]">-</span>
           <img 
-            src="/attached_assets/WhatsApp_Image_2026-01-22_at_2.13.29_PM_1769070916756.jpg" 
+            src={WhatsApp_Image_2026_01_22_at_2_13_29_PM} 
             alt="currency" 
             className="w-[60px] h-[80px] object-contain mt-2 mr-[-6px]"
           />
@@ -113,7 +112,6 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           {dateStr} at {timeStr}
         </div>
       </div>
-
       {/* Status Footer */}
       <div className="w-full flex items-center justify-center gap-2.5 pb-[64px]">
         <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#10b981] flex items-center justify-center bg-[#10b981]/5">
@@ -123,7 +121,6 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
         </div>
         <span className="text-[19px] font-medium tracking-tight text-[#0d3a2b]">Complete</span>
       </div>
-
       {/* Real Samsung Navigation Bar - VARIES BY STYLE */}
       {navStyle !== 'none' && (
         <div className="absolute bottom-0 w-full h-12 bg-white flex justify-around items-center px-10">
