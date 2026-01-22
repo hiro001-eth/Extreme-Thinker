@@ -87,22 +87,22 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       </div>
 
       {/* Main Transaction Info */}
-      <div className="mt-[74px] flex flex-col items-center">
+      <div className="mt-36 flex flex-col items-center">
         <div className="flex items-center -ml-4">
-          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-6px]">-</span>
+          <span className="text-[64px] font-bold tracking-tighter text-[#012a1c] mr-[-8px]">-</span>
           <img 
             src={dollarLogo} 
             alt="currency" 
             className="w-[62px] h-[82px] object-contain mt-3 mix-blend-multiply mr-[-8px]"
             style={{ filter: "contrast(1.2) brightness(1.1)" }}
           />
-          <span className="text-[76px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
+          <span className="text-[78px] font-bold leading-none tracking-tight text-[#012a1c]">{amountInt}</span>
           {amountDec !== "00" && (
             <span className="text-3xl font-bold mt-2 tracking-tighter align-top self-start text-[#012a1c]">{amountDec}</span>
           )}
         </div>
         
-        <div className="mt-1.5 text-[17px] font-medium text-gray-700 tracking-tight">
+        <div className="mt-3 text-[17px] font-medium text-gray-700 tracking-tight">
           For {remarks}
         </div>
         
@@ -112,13 +112,13 @@ export const Receipt = ({ amount, date, remarks, id, batteryLevel = 95 }: Receip
       </div>
 
       {/* Status Footer */}
-      <div className="absolute bottom-[108px] flex items-center justify-center gap-3">
-        <div className="w-[32px] h-[32px] rounded-full bg-[#012a1c] flex items-center justify-center">
-             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+      <div className="absolute bottom-[84px] flex items-center justify-center gap-2.5">
+        <div className="w-[30px] h-[30px] rounded-full border-[1.8px] border-[#012a1c] flex items-center justify-center">
+             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#012a1c" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
              </svg>
         </div>
-        <span className="text-[20px] font-medium tracking-tight text-[#012a1c]">Complete</span>
+        <span className="text-[19px] font-medium tracking-tight text-[#012a1c]">Complete</span>
       </div>
 
       {/* Real Samsung Navigation Bar */}
