@@ -191,26 +191,26 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
 
         {/* Bottom Navigation Bar */}
         {navStyle !== 'none' && (
-          <div className="w-full h-10 flex justify-center items-center px-8 mb-1">
+          <div className="w-full flex justify-center items-center pb-2 px-10">
             {navStyle === 'buttons' ? (
-              <div className={`w-full flex justify-between items-center opacity-30 px-4 ${isAngela ? 'invert' : ''}`}>
-                <div className="flex flex-col gap-[1.5px] items-center">
-                  <div className="w-[1.2px] h-3 bg-current"></div>
-                  <div className="w-[1.2px] h-3 bg-current ml-[3px]"></div>
-                  <div className="w-[1.2px] h-3 bg-current ml-[6px]"></div>
+              <div className={`w-full max-w-[320px] h-[44px] flex justify-between items-center px-12 rounded-[14px] bg-[#f0f0f0] opacity-90 ${isAngela ? 'invert' : ''}`}>
+                <div className="flex gap-[3.5px] items-center">
+                  <div className="w-[1.5px] h-3.5 bg-[#666] rounded-full"></div>
+                  <div className="w-[1.5px] h-3.5 bg-[#666] rounded-full"></div>
+                  <div className="w-[1.5px] h-3.5 bg-[#666] rounded-full"></div>
                 </div>
-                <div className="w-[17px] h-[17px] rounded-[3.5px] border-[1.8px] border-current"></div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <div className="w-[18px] h-[18px] rounded-[5px] border-[2px] border-[#666]"></div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6"/>
                 </svg>
               </div>
             ) : navStyle === 'swipe' ? (
-              <div className={`w-28 h-[3.5px] ${isAngela ? 'bg-white/15' : 'bg-black/15'} rounded-full`}></div>
+              <div className={`w-28 h-[4px] ${isAngela ? 'bg-white/15' : 'bg-black/15'} rounded-full`}></div>
             ) : (
-              <div className={`w-full flex justify-between items-center opacity-30 px-6 ${isAngela ? 'invert' : ''}`}>
-                <div className="w-3.5 h-3.5 rounded-full border-[1.8px] border-current"></div>
-                <div className="w-3.5 h-3.5 rounded-[3px] border-[1.8px] border-current"></div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <div className={`w-full max-w-[320px] h-[44px] flex justify-between items-center px-12 rounded-[14px] bg-[#f0f0f0] opacity-90 ${isAngela ? 'invert' : ''}`}>
+                <div className="w-4 h-4 rounded-full border-[2px] border-[#666]"></div>
+                <div className="w-4 h-4 rounded-[4px] border-[2px] border-[#666]"></div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6"/>
                 </svg>
               </div>
