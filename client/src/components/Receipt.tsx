@@ -191,26 +191,26 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
 
         {/* Bottom Navigation Bar */}
         {navStyle !== 'none' && (
-          <div className="w-full h-10 flex justify-center items-center px-10">
+          <div className="w-full h-10 flex justify-center items-center px-8 mb-1">
             {navStyle === 'buttons' ? (
-              <div className={`w-full flex justify-around items-center opacity-25 ${isAngela ? 'invert' : ''}`}>
-                <div className="flex flex-col gap-[2px]">
+              <div className={`w-full flex justify-between items-center opacity-30 px-4 ${isAngela ? 'invert' : ''}`}>
+                <div className="flex flex-col gap-[1.5px] items-center">
                   <div className="w-[1.2px] h-3 bg-current"></div>
-                  <div className="w-[1.2px] h-3 bg-current ml-[4px]"></div>
-                  <div className="w-[1.2px] h-3 bg-current ml-[8px]"></div>
+                  <div className="w-[1.2px] h-3 bg-current ml-[3px]"></div>
+                  <div className="w-[1.2px] h-3 bg-current ml-[6px]"></div>
                 </div>
-                <div className="w-4 h-4 rounded-[3px] border-[1.5px] border-current"></div>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <div className="w-[17px] h-[17px] rounded-[3.5px] border-[1.8px] border-current"></div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6"/>
                 </svg>
               </div>
             ) : navStyle === 'swipe' ? (
-              <div className={`w-32 h-[3.5px] ${isAngela ? 'bg-white/10' : 'bg-black/10'} rounded-full mb-1`}></div>
+              <div className={`w-28 h-[3.5px] ${isAngela ? 'bg-white/15' : 'bg-black/15'} rounded-full`}></div>
             ) : (
-              <div className={`w-full flex justify-around items-center opacity-25 ${isAngela ? 'invert' : ''}`}>
-                <div className="w-3.5 h-3.5 rounded-full border-[1.5px] border-current"></div>
-                <div className="w-3.5 h-3.5 rounded-[3px] border-[1.5px] border-current"></div>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <div className={`w-full flex justify-between items-center opacity-30 px-6 ${isAngela ? 'invert' : ''}`}>
+                <div className="w-3.5 h-3.5 rounded-full border-[1.8px] border-current"></div>
+                <div className="w-3.5 h-3.5 rounded-[3px] border-[1.8px] border-current"></div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6"/>
                 </svg>
               </div>
