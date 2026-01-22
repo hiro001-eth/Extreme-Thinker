@@ -117,7 +117,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           {userName.charAt(0)}
         </div>
         <h2 className="text-[21px] font-bold tracking-tight text-[#0d3a2b]">{userName}</h2>
-        <div className="flex items-center gap-0.5 mt-1">
+        <div className="flex items-center mt-1">
           <p className="text-gray-500 text-[13px] font-medium tracking-tight">Payment to</p>
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_dollar_sign} 
@@ -135,7 +135,7 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
           <img 
             src={WhatsApp_Image_2026_01_22_at_2_13_29_PM_removebg_preview} 
             alt="currency" 
-            className="w-[48px] h-[48px] object-contain flex items-center mix-blend-multiply mt-[0px] mb-[0px] mr-[-8px]"
+            className="w-[48px] h-[48px] object-contain flex items-center mix-blend-multiply mt-[0px] mb-[0px] mr-[-10px]"
           />
           <span className="font-bold tracking-tighter text-[#0d3a2b] flex items-center h-full ml-[0px] mr-[0px] mt-[0px] mb-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px] text-justify text-[67px]">{amountInt}</span>
           {amountDec && amountDec !== "00" && (
