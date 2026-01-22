@@ -85,31 +85,28 @@ export const Receipt = ({ amount, date, remarks, userName, userHandle, navStyle,
         </div>
 
         {/* Right Section: Location + Network + Signal + Battery */}
-        <div className="flex items-center" style={{ gap: `${stats.layoutGap + 3}px` }}>
-          <div className="flex items-center" style={{ gap: `${stats.layoutGap}px` }}>
-            {stats.showLocation && <MapPin className="h-2.5 w-2.5 opacity-80" />}
-            <span className="text-[9px] font-black opacity-90">{stats.networkType}</span>
-            <Wifi className="h-3 w-3 opacity-90" />
-            <div className="flex items-end gap-[1px] h-[9px]">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className={`w-[2.5px] rounded-[0.5px] bg-current ${i > stats.signalBars ? 'opacity-30' : 'opacity-90'}`} style={{ height: `${i * 2 + 1}px` }} />
-              ))}
+          <div className="flex items-center" style={{ gap: `${stats.layoutGap + 3}px` }}>
+            <div className="flex items-center" style={{ gap: `${stats.layoutGap}px` }}>
+              {stats.showLocation && <MapPin className="h-2.5 w-2.5 opacity-80" />}
+              <span className="text-[9px] font-black opacity-90">{stats.networkType}</span>
+              <Wifi className="h-3 w-3 opacity-90" />
+              <div className="flex items-end gap-[1px] h-[9px]">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className={`w-[2.5px] rounded-[0.5px] bg-current ${i > stats.signalBars ? 'opacity-30' : 'opacity-90'}`} style={{ height: `${i * 2 + 1}px` }} />
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex items-center" style={{ gap: `${stats.layoutGap}px` }}>
+               <div className="flex items-center gap-1">
+                 <span className="tabular-nums text-[10px]">{stats.batteryLevel}%</span>
+                 <div className="relative w-[19px] h-[9.5px] border border-current/30 rounded-[1.5px] flex items-center px-[0.5px]">
+                   <div className="h-[6.5px] bg-current/90 rounded-[0.5px]" style={{ width: `${(stats.batteryLevel / 100) * 16}px` }} />
+                   <div className="absolute -right-[2.5px] w-[1px] h-1 bg-current/40 rounded-r-full" />
+                 </div>
+               </div>
             </div>
           </div>
-          
-          <div className="flex items-center" style={{ gap: `${stats.layoutGap}px` }}>
-             <div className="px-1 py-0 bg-black/5 rounded-full text-[8.5px] font-black opacity-70">
-               {stats.batteryHealth}
-             </div>
-             <div className="flex items-center gap-1">
-               <span className="tabular-nums text-[10px]">{stats.batteryLevel}%</span>
-               <div className="relative w-[19px] h-[9.5px] border border-current/30 rounded-[1.5px] flex items-center px-[0.5px]">
-                 <div className="h-[6.5px] bg-current/90 rounded-[0.5px]" style={{ width: `${(stats.batteryLevel / 100) * 16}px` }} />
-                 <div className="absolute -right-[2.5px] w-[1px] h-1 bg-current/40 rounded-r-full" />
-               </div>
-             </div>
-          </div>
-        </div>
       </div>
     );
   };
