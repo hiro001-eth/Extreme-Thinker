@@ -106,11 +106,11 @@ export const Receipt = ({ amount, date, remarks, userName, navStyle, id, battery
           )}
         </div>
         
-        <div className="mt-1 text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
+        <div className="mt-[-2px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
           For {remarks}
         </div>
         
-        <div className="mt-[1px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
+        <div className="mt-[-2px] text-[17px] font-medium tracking-tight" style={{ color: secondaryColor }}>
           {dateStr} at {timeStr}
         </div>
       </div>
